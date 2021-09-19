@@ -1,0 +1,9 @@
+#ignore binary files
+/bin/main.exec
+
+#ignore .ini files
+imgui.ini
+bin/
+.vscode/
+
+.ccls
