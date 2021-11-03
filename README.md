@@ -2,7 +2,7 @@
 [![ci](https://github.com/codesole/opengl_learn/actions/workflows/ci.yml/badge.svg)](https://github.com/codesole/opengl_learn/actions?query=workflow%3Aci)
 [![Build Status](https://travis-ci.com/CODESOLE/opengl_learn.svg?branch=main)](https://travis-ci.com/CODESOLE/opengl_learn)
 [![CodeQL](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml)
-[![CodeFactor](https://www.codefactor.io/repository/github/codesole/nwe/badge)](https://www.codefactor.io/repository/github/codesole/nwe)
+[![CodeFactor](https://www.codefactor.io/repository/github/codesole/opengl_learn/badge)](https://www.codefactor.io/repository/github/codesole/opengl_learn)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5d023f93e2744e559111e6bf8953d557)](https://www.codacy.com/gh/CODESOLE/opengl_learn/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CODESOLE/opengl_learn&amp;utm_campaign=Badge_Grade)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/CODESOLE/opengl_learn.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/CODESOLE/opengl_learn/context:cpp)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/CODESOLE/opengl_learn.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/CODESOLE/opengl_learn/alerts/)
