@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "../dep/linmath.h"
+#include "linmath.h"
 #include "shader_program.h"
 #include "object.h"
 #include "draw.h"

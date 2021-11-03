@@ -21,7 +21,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "../dep/gl.h"
+#include "glad.h"
 #include <stdio.h>
 
 typedef struct {

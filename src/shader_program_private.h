@@ -21,7 +21,7 @@
 #ifndef SHADER_PROGRAM_PRIVATE_H
 #define SHADER_PROGRAM_PRIVATE_H
 
-#include "../dep/gl.h"
+#include "glad.h"
 #include "shader_program.h"
 
 GLint

@@ -25,14 +25,14 @@
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include "../dep/gl.h"
+#include "glad.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "../dep/linmath.h"
+#include "linmath.h"
 #include "object.h"
-#include "../dep/debugbreak.h"
+#include "debugbreak.h"
 
 #define ASSERT(x) \
     if (!(x))     \

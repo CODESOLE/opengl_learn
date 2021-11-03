@@ -64,18 +64,16 @@ bool GLLogCall(const char *funcName, const char *file, int line)
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
-  UNUSED (window); UNUSED (xpos); UNUSED (ypos);
 }
 
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-  UNUSED (window); UNUSED (xoffset); UNUSED (yoffset);
 }
 
 void error_callback(int error, const char* description)
 {
   UNUSED (error);
-  fprintf(stderr, "Error: %s\n", description);
+    fprintf(stderr, "Error: %s\n", description);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -123,7 +121,7 @@ init_glfw_glad (int width, int height, const char* windowName)
   glfwSetScrollCallback (window, scroll_callback);
 
   glfwMakeContextCurrent (window);
-  if (!gladLoadGL(glfwGetProcAddress))
+  if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
     {
       printf ("Failed to initialize GLAD\n");
       exit (EXIT_FAILURE);

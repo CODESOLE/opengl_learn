@@ -1,0 +1,64 @@
+env:
+  global:
+    # COVERITY_SCAN_TOKEN
+    # ** specific to your project **
+    - secure: "BRQqeN7UImfe6nVD8NR2R/I/fgFyAFLP1WWkrEFOqJ3h41QaKnCwactNBil72onkgRtxKvrtIyAHSwJnhMCbLBjBLm6GlwHvsOwo3ps96gcav7BxZx93AfNYhKXBtHRG3dElDRxoaRx5GW1H6JMt7q2frGlVQZ0SmbpHmBf+XZBVDBVqePzsbaMcKGfg67GJhKUNQ2lom1ddNVKDDphLZ6+2jMvHTy44/F516zDdSE63n4krqajgYAC9nBaLvUwmpUeHGgd9JnYxkIZiORqxDjO0Getta7KWX0T9Su48ThHlp9EKbWrnb5xOFDhGZZyEH/sar8jfz6zDyg7N9LAJ1Ha468C/y4z+qxxB6/634+F5KLcBbME0FNRX51hTAYIbzcZc130FevYXMwmRsmchMllRm9fWii4OayG27S90HtbZrZwhZ3GQJGOWccwBkSHZp1MQx6g7oFqkCuwLsKFcN70EVdTNvHoRY7dG/QI/dzq3Ois3oynFcRvp5gzN9Vb7tTVGAPqXhG35YLoTUPMwbhDLYUC5hN6WbEgbhl3gaMJ8FEt+zJsOaJhn+dw+iVIL6OVe+9iSXYKueUgMZpH7cSVDeJKH5YYK/Quu3ThqDyRj2J7bQmHMWLFYKcD8sbniOc0PoQHxaRx4ZHhzE0jRvH9gZQqJGszZOVZmw9M7riE="
+    
+dist: focal
+language: c
+sudo: required
+compiler:
+- gcc
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    # ** specific to your project **
+    project:
+      name: opengl_learn
+      version: 0.0.1
+      description: OpenGL learn
+
+    # Where email notification of build analysis results will be sent
+    notification_email: canerselcuk44@hotmail.com
+
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: cmake -S . -B build
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command: make -C build
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: main
+    
+    
+  apt:
+    packages: &common-apt-packages
+      - apport
+      - autoconf
+      - automake
+      - build-essential
+      - gcc
+      - cmake
+      - gcc-multilib
+      - gdb
+      - libtool-bin
+      - libglfw3
+      - libglfw3-dev
+      - libxi-dev
+      - libxcursor-dev
+      - libxrandr-dev
+      - libxinerama-dev
+      - ninja-build
+      - pkg-config
+      
+script:
+- cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+- cmake --build build --config Release
+
+after_success:
+- ctest --test-dir build -C Release

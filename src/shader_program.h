@@ -23,7 +23,7 @@
 
 #include "common.h"
 #include "parse_shader.h"
-#include "../dep/map.h"
+#include "map.h"
 
 typedef struct 
 {

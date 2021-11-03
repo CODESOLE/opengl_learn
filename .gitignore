@@ -1,9 +1,13 @@
-#ignore binary files
-/bin/main.exec
-
-#ignore .ini files
-imgui.ini
-bin/
-.vscode/
-
-.ccls
+*~
+*.swp
+*.out
+/.vscode
+/builddir
+/buildNinja
+/buildMSBuild
+/buildMake
+/build
+/coverage/*
+!/coverage/Makefile
+compile_commands.json
+/.cache

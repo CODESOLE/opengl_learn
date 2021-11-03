@@ -1,0 +1,224 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  DISPLAY: :0
+
+jobs:
+  LINUX_JOB_GCC:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: install-deps
+      run: sudo apt update && sudo apt install xorg openbox libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev ninja-build pkg-config libx11-dev
+      
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C ${{env.BUILD_TYPE}}
+      
+    - name: Create Directory & Copy Release Files
+      working-directory: ${{github.workspace}}/build
+      run: mkdir -p linux-release && cp -r NWE shaders/ linux-release/
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        type: 'tar'
+        filename: 'linux-release.tar.gz'
+        directory: ${{github.workspace}}/build
+        path: ./linux-release/
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+         name: linux-build-artifact
+         path: ${{github.workspace}}/build/linux-release.tar.gz
+         if-no-files-found: error
+         retention-days: 1
+         
+  LINUX_JOB_CLANG:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: install-deps
+      run: sudo apt update && sudo apt install xorg openbox libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev ninja-build pkg-config libx11-dev
+      
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C ${{env.BUILD_TYPE}}
+
+         
+  WINDOWS_JOB_MINGW-W64:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Ninja
+      uses: ashutoshvarma/setup-ninja@v1.1
+      with:
+        # Ninja version. Make sure given ninja version exists in ninja github release
+        version: 1.10.2
+        # Folder where ninja binary will be downloaded
+        dest: ninja_bin
+        # Override default platform detection logic. Accepted values are [mac, linux, win]
+        platform: win
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C ${{env.BUILD_TYPE}}
+
+         
+  WINDOWS_JOB_CLANG:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Cache LLVM and Clang
+      id: cache-llvm
+      uses: actions/cache@v2
+      with:
+        path: |
+          C:/Program Files/LLVM
+          ./llvm
+        key: llvm-12
+        
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1
+      with:
+        version: "12"
+        cached: ${{ steps.cache-llvm.outputs.cache-hit }}
+    
+    
+    - name: Setup Ninja
+      uses: ashutoshvarma/setup-ninja@v1.1
+      with:
+        # Ninja version. Make sure given ninja version exists in ninja github release
+        version: 1.10.2
+        # Folder where ninja binary will be downloaded
+        dest: ninja_bin
+        # Override default platform detection logic. Accepted values are [mac, linux, win]
+        platform: win
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C ${{env.BUILD_TYPE}}
+
+  WINDOWS_JOB_MSVC:
+    runs-on: windows-latest
+
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C ${{env.BUILD_TYPE}}
+      
+      
+ #   - name: Create Directory & Copy Release Files
+ #     working-directory: ${{github.workspace}}/build
+ #     run: Copy-Item -Path ../shaders -Filter "*.*" -Recurse -Destination ./Release
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        type: 'zip'
+        filename: 'windows-release.zip'
+        directory: ${{github.workspace}}/build
+        path: ./Release/
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+         name: windows-build-artifact
+         path: ${{github.workspace}}/build/windows-release.zip
+         if-no-files-found: error
+         retention-days: 1
+         
+  Release:
+    needs: [LINUX_JOB_GCC, WINDOWS_JOB_MSVC]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.10
+    
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+          files: |
+            linux-build-artifact
+            windows-build-artifact
+            
+    #- name: Delete All Artifacts
+    #  uses: joutvhu/delete-artifact@v1
+            
