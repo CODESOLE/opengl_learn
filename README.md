@@ -1,4 +1,5 @@
 # OpenGL Learn
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b159fbee089d4ae99dcea61920402ec4)](https://app.codacy.com/gh/CODESOLE/opengl_learn?utm_source=github.com&utm_medium=referral&utm_content=CODESOLE/opengl_learn&utm_campaign=Badge_Grade_Settings)
 [![ci](https://github.com/codesole/opengl_learn/actions/workflows/ci.yml/badge.svg)](https://github.com/codesole/opengl_learn/actions?query=workflow%3Aci)
 [![Build Status](https://travis-ci.com/CODESOLE/opengl_learn.svg?branch=main)](https://travis-ci.com/CODESOLE/opengl_learn)
 [![CodeQL](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml)
