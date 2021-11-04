@@ -1,0 +1,13 @@
+*~
+*.swp
+*.out
+/.vscode
+/builddir
+/buildNinja
+/buildMSBuild
+/buildMake
+/build
+/coverage/*
+!/coverage/Makefile
+compile_commands.json
+/.cache
