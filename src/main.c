@@ -32,43 +32,38 @@ unsigned int indices[] = {  // note that we start from 0!
     1, 2, 3   // second Triangle
 };
 
-int
-main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   char shader_file[128] = { 0 };
 
-  if (argc >= 2)
-    {
+  if (argc >= 2) {
       if (argv[1] != NULL)
-          strncpy (shader_file, argv[1], 127);
+          strncpy(shader_file, argv[1], 127);
       shader_file[127] = '\0';
-    }
-  else
-    {
+  }
+  else {
       const char *default_shader_file = "shaders/sample.shader";
-      strncpy (shader_file, default_shader_file, 127);
+      strncpy(shader_file, default_shader_file, 127);
       shader_file[127] = '\0';
-    }
+  }
 
-  GLFWwindow* window = init_glfw_glad (640, 480, "NWE");
+  GLFWwindow* window = init_glfw_glad(640, 480, "NWE");
   int width = 0, height = 0;
-  ShaderProgram* shaderProgram = create_shader_program (shader_file);
-  Object* object = create_object (vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[1]){3}, 1);
+  ShaderProgram* shaderProgram = create_shader_program(shader_file);
+  Object* object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[1]){3}, 1);
 
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-  while (!glfwWindowShouldClose(window))
-    {
-      float ratio = calculate_ratio (window, &width, &height);
-      UNUSED (ratio);
-      gl_clear_color (BLACK_COLOR);
-      float timee = (float)glfwGetTime ();
-      draw (object, shaderProgram);
-      set_shader_uniform (shaderProgram, "time", (void *)&timee, UNIFORM_FLOAT);
-      glfw_routine (window);
+  while (!glfwWindowShouldClose(window)) {
+      float ratio = calculate_ratio(window, &width, &height);
+      UNUSED(ratio);
+      gl_clear_color(BLACK_COLOR);
+      float timee = (float)glfwGetTime();
+      draw(object, shaderProgram);
+      set_shader_uniform(shaderProgram, "time", (void *)&timee, UNIFORM_FLOAT);
+      glfw_routine(window);
     }
-  destroy_object (&object);
-  destroy_shader (&shaderProgram);
-  destroy_terminate_glfw (window);
+  destroy_object(&object);
+  destroy_shader(&shaderProgram);
+  destroy_terminate_glfw(window);
   exit(EXIT_SUCCESS);
 }

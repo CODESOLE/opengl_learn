@@ -31,15 +31,13 @@
 #define MAX_READ_CHAR 999
 
 typedef struct {
-  char* vertexShader;
-  char* fragmentShader;
-}VertexFragmentShader;
+  char *vertexShader;
+  char *fragmentShader;
+} VertexFragmentShader;
 
 
-VertexFragmentShader*
-parse_shader (const char *shader_file);
+VertexFragmentShader *parse_shader(const char *shader_file);
 
-VertexFragmentShader*
-parse_shader_vs_fs (const char *vertexS, const char* fragmentS);
+VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragmentS);
 
 #endif

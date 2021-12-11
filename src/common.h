@@ -41,7 +41,6 @@
 #ifndef NDEBUG
 #define GLErrCall(x) \
     GLClearError();  \
-    puts("RIGHT NOW DEBUG!!!!");  \
     x;               \
     ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 #else
@@ -53,40 +52,28 @@
 #define RED_COLOR (vec4){1.0f, 0.0f, 0.0f, 1.0f}
 #define BLACK_COLOR (vec4){0.0f, 0.0f, 0.0f, 1.0f}
 
-void
-GLClearError (void);
+void GLClearError(void);
 
-bool
-GLLogCall (const char *funcName, const char *file, int line);
+bool GLLogCall(const char *funcName, const char *file, int line);
 
-void
-mouse_callback (GLFWwindow *window, double xpos, double ypos);
+void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
-void
-scroll_callback (GLFWwindow *window, double xoffset, double yoffset);
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
-void
-error_callback (int error, const char* description);
+void error_callback(int error, const char* description);
 
-void
-framebuffer_size_callback (GLFWwindow* window, int width, int height);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-void
-key_callback (GLFWwindow* window, int key, int scancode, int action, int mods);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-void
-gl_clear_color (vec4 clearColor);
+void gl_clear_color(vec4 clearColor);
 
-GLFWwindow*
-init_glfw_glad (int width, int height, const char* windowName);
+GLFWwindow* init_glfw_glad(int width, int height, const char* windowName);
 
-float
-calculate_ratio (GLFWwindow* window, int* width, int* height);
+float calculate_ratio(GLFWwindow* window, int* width, int* height);
 
-void
-glfw_routine (GLFWwindow* window);
+void glfw_routine(GLFWwindow* window);
 
-void
-destroy_terminate_glfw (GLFWwindow* window);
+void destroy_terminate_glfw(GLFWwindow* window);
 
 #endif

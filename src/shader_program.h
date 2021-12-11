@@ -25,10 +25,9 @@
 #include "parse_shader.h"
 #include "map.h"
 
-typedef struct 
-{
+typedef struct {
   GLuint shaderProgramID;
-  Map* uniformCache;
+  Map *uniformCache;
 } ShaderProgram;
 
 typedef enum {
@@ -43,27 +42,20 @@ typedef enum {
     UNIFORM_SAMPLER2D
 } ShaderUniformDataType;
 
-ShaderProgram*
-create_shader_program (const char* shaderFileName);
+ShaderProgram *create_shader_program(const char* shaderFileName);
 
-ShaderProgram*
-create_shader_program_vs_fs (const char* vertexSource, const char* fragmentSource);
+ShaderProgram *create_shader_program_vs_fs(const char* vertexSource, const char* fragmentSource);
 
-void
-use_shader (ShaderProgram* shaderProgram);
+void use_shader(ShaderProgram *shaderProgram);
 
-void
-set_shader_uniform (ShaderProgram* shaderProgram, const char* uniformName,
-                    const void *value, ShaderUniformDataType uniformType);
+void set_shader_uniform(ShaderProgram *shaderProgram, const char *uniformName,
+                        const void *value, ShaderUniformDataType uniformType);
 
-void
-set_shader_uniform_v (ShaderProgram* shaderProgram, const char* uniformName,
-                      const void *value, ShaderUniformDataType uniformType, GLuint count);
+void set_shader_uniform_v(ShaderProgram *shaderProgram, const char *uniformName,
+                          const void *value, ShaderUniformDataType uniformType, GLuint count);
 
-void
-unuse_shader (void);
+void unuse_shader(void);
 
-void
-destroy_shader (ShaderProgram** shaderProgram);
+void destroy_shader(ShaderProgram **shaderProgram);
 
 #endif

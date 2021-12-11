@@ -20,18 +20,14 @@
 
 #include "draw.h"
 
-void
-draw (Object* object, ShaderProgram* shaderProgram)
-{
-  use_shader (shaderProgram);
+void draw (Object* object, ShaderProgram* shaderProgram) {
+  use_shader(shaderProgram);
   GLErrCall (glBindVertexArray(object->vaoId));
-  if (object->indicies)
-    {
-      GLErrCall (glDrawElements(GL_TRIANGLES, (GLsizei)object->indexSize, GL_UNSIGNED_INT, 0));
-    }
-  else
-    {
-      GLErrCall (glDrawArrays(GL_TRIANGLES, 0, (GLsizei)object->vertexCount));
-    }
+  if (object->indicies) {
+    GLErrCall (glDrawElements(GL_TRIANGLES, (GLsizei)object->indexSize, GL_UNSIGNED_INT, 0));
+  }
+  else {
+    GLErrCall (glDrawArrays(GL_TRIANGLES, 0, (GLsizei)object->vertexCount));
+  }
   glBindVertexArray(0);
 }

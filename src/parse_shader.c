@@ -21,145 +21,124 @@
 #include "parse_shader.h"
 
 
-VertexFragmentShader*
-parse_shader_vs_fs (const char *vertexS, const char* fragmentS)
-{
-  if ((vertexS == NULL) || (fragmentS == NULL))
-    {
-      puts ("vertex shader source or fragment shader source is cannot be NULL");
-      return NULL;
-    }
-  if (strlen (vertexS) < 4 || strlen (fragmentS) < 4)
-    {
-      puts ("Invalid file!");
-      return NULL;
-    }
-  if (strncmp (vertexS + strlen(vertexS) - 3, ".vs", 3) != 0)
-    {
-      puts ("File should be ended with .vs!");
-      return NULL;
-    }
+VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragmentS) {
+  if ((vertexS == NULL) || (fragmentS == NULL)) {
+    puts("vertex shader source or fragment shader source is cannot be NULL");
+    return NULL;
+  }
+  if (strlen(vertexS) < 4 || strlen(fragmentS) < 4) {
+    puts("Invalid file!");
+    return NULL;
+  }
+  if (strncmp(vertexS + strlen(vertexS) - 3, ".vs", 3) != 0) {
+    puts("File should be ended with .vs!");
+    return NULL;
+  }
 
-  if (strncmp (fragmentS + strlen(fragmentS) - 3, ".fs", 3) != 0)
-    {
-      puts ("File should be ended with .fs!");
-      return NULL;
-    }
+  if (strncmp(fragmentS + strlen(fragmentS) - 3, ".fs", 3) != 0) {
+    puts("File should be ended with .fs!");
+    return NULL;
+  }
 
-  FILE* vertexFile = fopen (vertexS, "r");
-  if(vertexFile == NULL)
-    {
-      fprintf (stderr, "Error opening file: %s\n", vertexS);
-      return NULL;
-    }
+  FILE* vertexFile = fopen(vertexS, "r");
+  if(vertexFile == NULL) {
+    fprintf(stderr, "Error opening file: %s\n", vertexS);
+    return NULL;
+  }
 
   char line[MAX_READ_CHAR] = { 0 };
   VertexFragmentShader* parsed_data = calloc(1, sizeof (VertexFragmentShader));
-  parsed_data->vertexShader = malloc (1);
-  strcpy (parsed_data->vertexShader, "");
-  parsed_data->fragmentShader = malloc (1);
-  strcpy (parsed_data->fragmentShader, "");
+  parsed_data->vertexShader = malloc(1);
+  strcpy(parsed_data->vertexShader, "");
+  parsed_data->fragmentShader = malloc(1);
+  strcpy(parsed_data->fragmentShader, "");
 
-  while (fgets(line, MAX_READ_CHAR, vertexFile) != NULL)
-    {
-      parsed_data->vertexShader = realloc (parsed_data->vertexShader,
-                                           strlen (parsed_data->vertexShader) +
-                                           strlen (line) + 1);
+  while (fgets(line, MAX_READ_CHAR, vertexFile) != NULL) {
+    parsed_data->vertexShader = realloc(parsed_data->vertexShader,
+                                        strlen(parsed_data->vertexShader) +
+                                        strlen(line) + 1);
 
-      strncat (parsed_data->vertexShader, line, strlen (parsed_data->vertexShader) + strlen (line) + 1);
-     }
-  fclose (vertexFile);
+    strncat(parsed_data->vertexShader, line, strlen(parsed_data->vertexShader) + strlen(line) + 1);
+  }
+  fclose(vertexFile);
 
-  FILE* fragmentFile = fopen (fragmentS, "r");
-  if(fragmentFile == NULL)
-    {
-      fprintf (stderr, "Error opening file: %s\n", fragmentS);
-      return NULL;
-    }
+  FILE* fragmentFile = fopen(fragmentS, "r");
+  if(fragmentFile == NULL) {
+    fprintf(stderr, "Error opening file: %s\n", fragmentS);
+    return NULL;
+  }
 
-  while (fgets(line, MAX_READ_CHAR, fragmentFile) != NULL)
-    {
-      parsed_data->fragmentShader = realloc (parsed_data->fragmentShader,
-                                           strlen (parsed_data->fragmentShader) +
-                                           strlen (line) + 1);
+  while (fgets(line, MAX_READ_CHAR, fragmentFile) != NULL) {
+    parsed_data->fragmentShader = realloc(parsed_data->fragmentShader,
+                                          strlen(parsed_data->fragmentShader) +
+                                          strlen(line) + 1);
 
-      strncat (parsed_data->fragmentShader, line, strlen (parsed_data->fragmentShader) + strlen (line) + 1);
-    }
-  fclose (fragmentFile);
+    strncat(parsed_data->fragmentShader, line, strlen(parsed_data->fragmentShader) + strlen(line) + 1);
+  }
+  fclose(fragmentFile);
 
   return parsed_data;
 }
 
-VertexFragmentShader*
-parse_shader (const char *shader_file)
-{
-  if (strlen (shader_file) < 8)
-    {
-      puts ("Invalid file!");
-      return NULL;
-    }
-  if (strncmp (shader_file + strlen(shader_file) - 7, ".shader", 7) != 0)
-    {
-      puts ("File should be ended with .shader!");
-      return NULL;
-    }
+VertexFragmentShader *parse_shader(const char *shader_file) {
+  if (strlen(shader_file) < 8) {
+    puts("Invalid file!");
+    return NULL;
+  }
+  if (strncmp(shader_file + strlen(shader_file) - 7, ".shader", 7) != 0) {
+    puts("File should be ended with .shader!");
+    return NULL;
+  }
 
-  FILE* file = fopen (shader_file, "r");
-  if(file == NULL)
-    {
-      fprintf (stderr, "Error opening file: %s\n", shader_file);
-      return NULL;
-    }
+  FILE* file = fopen(shader_file, "r");
+  if(file == NULL) {
+    fprintf(stderr, "Error opening file: %s\n", shader_file);
+    return NULL;
+  }
 
   char line[MAX_READ_CHAR] = { 0 };
   VertexFragmentShader* parsed_data = calloc(1, sizeof (VertexFragmentShader));
-  parsed_data->vertexShader = malloc (1);
-  strcpy (parsed_data->vertexShader, "");
-  parsed_data->fragmentShader = malloc (1);
-  strcpy (parsed_data->fragmentShader, "");
+  parsed_data->vertexShader = malloc(1);
+  strcpy(parsed_data->vertexShader, "");
+  parsed_data->fragmentShader = malloc(1);
+  strcpy(parsed_data->fragmentShader, "");
   unsigned vertexFound = 0, fragmentFound = 0;
 
-  while (fgets(line, MAX_READ_CHAR, file) != NULL)
-    {
-      if (strncmp (line, "#vertex", 7) == 0)
-        {
+  while (fgets(line, MAX_READ_CHAR, file) != NULL) {
+    if (strncmp(line, "#vertex", 7) == 0) {
 vertex:
-          vertexFound = 1;
-          while (fgets(line, MAX_READ_CHAR, file) != NULL)
-            {
-              if (strncmp (line, "#fragment", 9) == 0)
-                  goto fragment;
+      vertexFound = 1;
+      while (fgets(line, MAX_READ_CHAR, file) != NULL) {
+        if (strncmp(line, "#fragment", 9) == 0)
+            goto fragment;
 
-              parsed_data->vertexShader = realloc (parsed_data->vertexShader,
-                                                   strlen (parsed_data->vertexShader) +
-                                                   strlen (line) + 1);
+        parsed_data->vertexShader = realloc(parsed_data->vertexShader,
+                                            strlen(parsed_data->vertexShader) +
+                                            strlen(line) + 1);
 
-              strncat (parsed_data->vertexShader, line, strlen (parsed_data->vertexShader) + strlen (line) + 1);
-            }
+        strncat(parsed_data->vertexShader, line, strlen(parsed_data->vertexShader) + strlen(line) + 1);
+      }
 
-        }
-      else if (strncmp (line, "#fargment", 9) == 0)
-        {
+    }
+    else if (strncmp(line, "#fargment", 9) == 0) {
 fragment:
-          fragmentFound = 1;
-          while (fgets(line, MAX_READ_CHAR, file) != NULL)
-            {
-              if (strncmp (line, "#vertex", 7) == 0)
-                  goto vertex;
+      fragmentFound = 1;
+      while (fgets(line, MAX_READ_CHAR, file) != NULL) {
+        if (strncmp(line, "#vertex", 7) == 0)
+            goto vertex;
 
-              parsed_data->fragmentShader = realloc (parsed_data->fragmentShader,
-                                                   strlen (parsed_data->fragmentShader) +
-                                                   strlen (line) + 1);
+        parsed_data->fragmentShader = realloc(parsed_data->fragmentShader,
+                                              strlen(parsed_data->fragmentShader) +
+                                              strlen(line) + 1);
 
-              strncat (parsed_data->fragmentShader, line, strlen (parsed_data->fragmentShader) + strlen (line) + 1);
-            }
-        }
+        strncat(parsed_data->fragmentShader, line, strlen(parsed_data->fragmentShader) + strlen(line) + 1);
+      }
     }
-  fclose (file);
-  if (!vertexFound || !fragmentFound)
-    {
-      perror ("Neither vertex or fragment shader source has not found please give a valid shader source file");
-      return NULL;
-    }
+  }
+  fclose(file);
+  if (!vertexFound || !fragmentFound) {
+    perror("Neither vertex or fragment shader source has not found please give a valid shader source file");
+    return NULL;
+  }
   return parsed_data;
 }

@@ -31,18 +31,16 @@ typedef struct {
 	size_t  indexSize;
 	size_t  bufferSize;
 	GLuint  numberOfAttr;
-  size_t  vertexCount;
+	size_t  vertexCount;
 	GLuint  vaoId;
 	GLuint  vboId;
 	GLuint  iboId;
-}Object;
+} Object;
 
-Object*
-create_object (void* vertexBufferData, size_t bufferSize,
-               GLuint* indicies, size_t indexSize, size_t vertexCount,
-               GLuint* arrayOfAttr, GLuint numberOfAttr);
+Object *create_object(void* vertexBufferData, size_t bufferSize,
+                      GLuint* indicies, size_t indexSize, size_t vertexCount,
+                      GLuint* arrayOfAttr, GLuint numberOfAttr);
 
-void
-destroy_object (Object** object);
+void destroy_object(Object** object);
 
 #endif

@@ -24,7 +24,6 @@
 #include "common.h"
 #include "shader_program.h"
 
-void
-draw (Object* object, ShaderProgram* shaderProgram);
+void draw(Object* object, ShaderProgram* shaderProgram);
 
 #endif
