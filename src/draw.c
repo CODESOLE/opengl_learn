@@ -20,7 +20,7 @@
 
 #include "draw.h"
 
-void draw (Object* object, ShaderProgram* shaderProgram) {
+void draw (Object *object, ShaderProgram *shaderProgram) {
   use_shader(shaderProgram);
   GLErrCall (glBindVertexArray(object->vaoId));
   if (object->indicies) {

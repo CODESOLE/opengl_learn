@@ -41,7 +41,7 @@ GLint check_and_get_uniform(ShaderProgram *shaderProgram, const char *uniform_na
   }
 }
 
-ShaderProgram *create_shader_program(const char* shaderFileName) {
+ShaderProgram *create_shader_program(const char *shaderFileName) {
   ShaderProgram *shaderProgram = calloc(1, sizeof(ShaderProgram));
   shaderProgram->uniformCache = init_map(MAP_HEAP);
   VertexFragmentShader *vertFragSource = parse_shader(shaderFileName);
@@ -94,7 +94,7 @@ ShaderProgram *create_shader_program(const char* shaderFileName) {
   return shaderProgram;
 }
 
-ShaderProgram *create_shader_program_vs_fs(const char* vertexSource, const char* fragmentSource) {
+ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char *fragmentSource) {
   ShaderProgram *shaderProgram = calloc(1, sizeof(ShaderProgram));
   shaderProgram->uniformCache = init_map(MAP_HEAP);
   VertexFragmentShader *vertFragSource = parse_shader_vs_fs(vertexSource, fragmentSource);

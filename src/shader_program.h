@@ -42,9 +42,9 @@ typedef enum {
     UNIFORM_SAMPLER2D
 } ShaderUniformDataType;
 
-ShaderProgram *create_shader_program(const char* shaderFileName);
+ShaderProgram *create_shader_program(const char *shaderFileName);
 
-ShaderProgram *create_shader_program_vs_fs(const char* vertexSource, const char* fragmentSource);
+ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char *fragmentSource);
 
 void use_shader(ShaderProgram *shaderProgram);
 

@@ -46,10 +46,10 @@ int main(int argc, char **argv) {
       shader_file[127] = '\0';
   }
 
-  GLFWwindow* window = init_glfw_glad(640, 480, "NWE");
+  GLFWwindow *window = init_glfw_glad(640, 480, "NWE");
   int width = 0, height = 0;
-  ShaderProgram* shaderProgram = create_shader_program(shader_file);
-  Object* object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[1]){3}, 1);
+  ShaderProgram *shaderProgram = create_shader_program(shader_file);
+  Object *object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[1]){3}, 1);
 
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

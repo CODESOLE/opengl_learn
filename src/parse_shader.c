@@ -21,7 +21,7 @@
 #include "parse_shader.h"
 
 
-VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragmentS) {
+VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragmentS) {
   if ((vertexS == NULL) || (fragmentS == NULL)) {
     puts("vertex shader source or fragment shader source is cannot be NULL");
     return NULL;
@@ -40,14 +40,14 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragme
     return NULL;
   }
 
-  FILE* vertexFile = fopen(vertexS, "r");
+  FILE *vertexFile = fopen(vertexS, "r");
   if(vertexFile == NULL) {
     fprintf(stderr, "Error opening file: %s\n", vertexS);
     return NULL;
   }
 
   char line[MAX_READ_CHAR] = { 0 };
-  VertexFragmentShader* parsed_data = calloc(1, sizeof (VertexFragmentShader));
+  VertexFragmentShader *parsed_data = calloc(1, sizeof (VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
   strcpy(parsed_data->vertexShader, "");
   parsed_data->fragmentShader = malloc(1);
@@ -62,7 +62,7 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragme
   }
   fclose(vertexFile);
 
-  FILE* fragmentFile = fopen(fragmentS, "r");
+  FILE *fragmentFile = fopen(fragmentS, "r");
   if(fragmentFile == NULL) {
     fprintf(stderr, "Error opening file: %s\n", fragmentS);
     return NULL;
@@ -90,14 +90,14 @@ VertexFragmentShader *parse_shader(const char *shader_file) {
     return NULL;
   }
 
-  FILE* file = fopen(shader_file, "r");
+  FILE *file = fopen(shader_file, "r");
   if(file == NULL) {
     fprintf(stderr, "Error opening file: %s\n", shader_file);
     return NULL;
   }
 
   char line[MAX_READ_CHAR] = { 0 };
-  VertexFragmentShader* parsed_data = calloc(1, sizeof (VertexFragmentShader));
+  VertexFragmentShader *parsed_data = calloc(1, sizeof (VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
   strcpy(parsed_data->vertexShader, "");
   parsed_data->fragmentShader = malloc(1);

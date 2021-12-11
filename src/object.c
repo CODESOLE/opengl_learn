@@ -22,15 +22,15 @@
 #include "common.h"
 
 
-Object *create_object (void* vertexBufferData, size_t bufferSize,
-                       GLuint* indicies, size_t indexSize, size_t vertexCount,
-                       GLuint* arrayOfAttr, GLuint numberOfAttr) {
+Object *create_object (void *vertexBufferData, size_t bufferSize,
+                       GLuint *indicies, size_t indexSize, size_t vertexCount,
+                       GLuint *arrayOfAttr, GLuint numberOfAttr) {
   if (!vertexBufferData || !arrayOfAttr) {
     printf("[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n", __FILE__, __LINE__);
     return NULL;
   }
 
-  Object* object = malloc(sizeof (Object));
+  Object *object = malloc(sizeof (Object));
 
   if (!object) {
     printf("[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
@@ -101,7 +101,7 @@ Object *create_object (void* vertexBufferData, size_t bufferSize,
   return object;
 }
 
-void destroy_object(Object** object) {
+void destroy_object(Object* *object) {
   if ((*object)->indicies) {
     GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall (glDeleteBuffers(1, &(*object)->vboId));

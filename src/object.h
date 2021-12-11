@@ -25,9 +25,9 @@
 #include <stdio.h>
 
 typedef struct {
-	GLuint* indicies;
-	float*  vertexBufferData;
-	GLuint* countOfEachAttr;
+	GLuint *indicies;
+	float  *vertexBufferData;
+	GLuint *countOfEachAttr;
 	size_t  indexSize;
 	size_t  bufferSize;
 	GLuint  numberOfAttr;
@@ -37,10 +37,10 @@ typedef struct {
 	GLuint  iboId;
 } Object;
 
-Object *create_object(void* vertexBufferData, size_t bufferSize,
-                      GLuint* indicies, size_t indexSize, size_t vertexCount,
-                      GLuint* arrayOfAttr, GLuint numberOfAttr);
+Object *create_object(void *vertexBufferData, size_t bufferSize,
+                      GLuint *indicies, size_t indexSize, size_t vertexCount,
+                      GLuint *arrayOfAttr, GLuint numberOfAttr);
 
-void destroy_object(Object** object);
+void destroy_object(Object **object);
 
 #endif

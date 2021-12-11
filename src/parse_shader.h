@@ -38,6 +38,6 @@ typedef struct {
 
 VertexFragmentShader *parse_shader(const char *shader_file);
 
-VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char* fragmentS);
+VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragmentS);
 
 #endif

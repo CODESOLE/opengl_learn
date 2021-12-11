@@ -62,17 +62,17 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos) {}
 
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {}
 
-void error_callback(int error, const char* description) {
+void error_callback(int error, const char *description) {
   UNUSED(error);
   fprintf(stderr, "Error: %s\n", description);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   UNUSED (window);
   GLErrCall (glViewport(0, 0, width, height));
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
   UNUSED(scancode); UNUSED(mods);
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
       glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -83,7 +83,7 @@ void gl_clear_color(vec4 clearColor) {
   GLErrCall (glClear(GL_COLOR_BUFFER_BIT));
 }
 
-GLFWwindow *init_glfw_glad(int width, int height, const char* windowName) {
+GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
   glfwSetErrorCallback(error_callback);
 
   if (!glfwInit())
@@ -94,7 +94,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char* windowName) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow* window = glfwCreateWindow(width, height, windowName, NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(width, height, windowName, NULL, NULL);
 
   if (!window) {
     glfwTerminate();
@@ -120,17 +120,17 @@ GLFWwindow *init_glfw_glad(int width, int height, const char* windowName) {
   return window;
 }
 
-float calculate_ratio(GLFWwindow* window, int* width, int* height) {
+float calculate_ratio(GLFWwindow *window, int *width, int *height) {
   glfwGetFramebufferSize(window, width, height);
   return *width / (float) *height;
 }
 
-void glfw_routine(GLFWwindow* window) {
+void glfw_routine(GLFWwindow *window) {
   glfwSwapBuffers(window);
   glfwPollEvents();
 }
 
-void destroy_terminate_glfw(GLFWwindow* window) {
+void destroy_terminate_glfw(GLFWwindow *window) {
   glfwDestroyWindow(window);
   glfwTerminate();
 }
