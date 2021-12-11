@@ -1,6 +1,7 @@
 *~
 *.swp
 *.out
+.cc*
 /.vscode
 /builddir
 /buildNinja
