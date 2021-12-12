@@ -22,10 +22,11 @@
 #include "draw.h"
 
 float vertices[] = {
-     0.5f,  0.5f, 0.0f,  // top right
-     0.5f, -0.5f, 0.0f,  // bottom right
-    -0.5f, -0.5f, 0.0f,  // bottom left
-    -0.5f,  0.5f, 0.0f   // top left
+    // positions          // colors           // texture coords
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
 };
 unsigned int indices[] = {  // note that we start from 0!
     0, 1, 3,  // first Triangle
@@ -39,8 +40,7 @@ int main(int argc, char **argv) {
       if (argv[1] != NULL)
           strncpy(shader_file, argv[1], 127);
       shader_file[127] = '\0';
-  }
-  else {
+  } else {
       const char *default_shader_file = "shaders/sample.shader";
       strncpy(shader_file, default_shader_file, 127);
       shader_file[127] = '\0';
@@ -49,7 +49,8 @@ int main(int argc, char **argv) {
   GLFWwindow *window = init_glfw_glad(640, 480, "NWE");
   int width = 0, height = 0;
   ShaderProgram *shaderProgram = create_shader_program(shader_file);
-  Object *object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[1]){3}, 1);
+  Object *object = create_object(vertices, sizeof(vertices), indices,
+                                 sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
 
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -61,7 +62,7 @@ int main(int argc, char **argv) {
       draw(object, shaderProgram);
       set_shader_uniform(shaderProgram, "time", (void *)&timee, UNIFORM_FLOAT);
       glfw_routine(window);
-    }
+  }
   destroy_object(&object);
   destroy_shader(&shaderProgram);
   destroy_terminate_glfw(window);
