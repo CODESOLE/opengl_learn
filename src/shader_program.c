@@ -30,7 +30,7 @@ GLint check_and_get_uniform(ShaderProgram *shaderProgram, const char *uniform_na
     GLint *location = malloc(sizeof(GLint));
     GLErrCall(*location = glGetUniformLocation(shaderProgram->shaderProgramID, uniform_name));
     if (*location == -1) {
-      printf("Warning: Uniform %s doesn't exist in shader!\n", uniform_name);
+      printf("WARNING: Uniform %s doesn't exist in shader!\n", uniform_name);
       free(location);
       return -1;
     }
@@ -171,10 +171,7 @@ void set_shader_uniform_v(ShaderProgram *shaderProgram, const char *uniformName,
                           const void *value, ShaderUniformDataType uniformType, GLuint count) {
   glUseProgram(shaderProgram->shaderProgramID);
   GLint loc = check_and_get_uniform(shaderProgram, uniformName);
-  if (loc == -1) {
-    puts("Specified uniform name couldn't find!");
-    return;
-  }
+  if (loc == -1) return;
 
   switch (uniformType) {
   case UNIFORM_FLOAT:
