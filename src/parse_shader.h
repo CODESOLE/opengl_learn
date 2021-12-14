@@ -1,4 +1,3 @@
-
 /* parse_shader.h
  *
  * Copyright 2021 CODESOLE
@@ -19,8 +18,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
-
 #ifndef PARSE_SHADER
 #define PARSE_SHADER
 
@@ -34,7 +31,6 @@ typedef struct {
   char *vertexShader;
   char *fragmentShader;
 } VertexFragmentShader;
-
 
 VertexFragmentShader *parse_shader(const char *shader_file);
 

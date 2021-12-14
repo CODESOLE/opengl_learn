@@ -25,8 +25,7 @@ void draw (Object *object, ShaderProgram *shaderProgram) {
   GLErrCall (glBindVertexArray(object->vaoId));
   if (object->indicies) {
     GLErrCall (glDrawElements(GL_TRIANGLES, (GLsizei)object->indexSize, GL_UNSIGNED_INT, 0));
-  }
-  else {
+  } else {
     GLErrCall (glDrawArrays(GL_TRIANGLES, 0, (GLsizei)object->vertexCount));
   }
   glBindVertexArray(0);

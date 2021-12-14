@@ -24,6 +24,6 @@
 #include "glad.h"
 #include "shader_program.h"
 
-GLint check_and_get_uniform(ShaderProgram* shaderProgram, const char *uniform_name);
+GLint check_and_get_uniform(ShaderProgram *shaderProgram, const char *uniform_name);
 
 #endif

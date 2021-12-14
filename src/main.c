@@ -35,15 +35,17 @@ unsigned int indices[] = {  // note that we start from 0!
 
 int main(int argc, char **argv) {
   char shader_file[128] = { 0 };
+  const char *default_shader_file = "shaders/sample.shader";
 
   if (argc >= 2) {
-      if (argv[1] != NULL)
-          strncpy(shader_file, argv[1], 127);
-      shader_file[127] = '\0';
-  } else {
-      const char *default_shader_file = "shaders/sample.shader";
+    if (argv[1] != NULL && strstr(argv[1], "..\0") == NULL)
+      strncpy(shader_file, argv[1], 127);
+    else
       strncpy(shader_file, default_shader_file, 127);
-      shader_file[127] = '\0';
+    shader_file[127] = '\0';
+  } else {
+    strncpy(shader_file, default_shader_file, 127);
+    shader_file[127] = '\0';
   }
 
   GLFWwindow *window = init_glfw_glad(640, 480, "NWE");
@@ -55,13 +57,13 @@ int main(int argc, char **argv) {
   //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
   while (!glfwWindowShouldClose(window)) {
-      float ratio = calculate_ratio(window, &width, &height);
-      UNUSED(ratio);
-      gl_clear_color(BLACK_COLOR);
-      float timee = (float)glfwGetTime();
-      draw(object, shaderProgram);
-      set_shader_uniform(shaderProgram, "time", (void *)&timee, UNIFORM_FLOAT);
-      glfw_routine(window);
+    float ratio = calculate_ratio(window, &width, &height);
+    UNUSED(ratio);
+    gl_clear_color(BLACK_COLOR);
+    float timee = (float)glfwGetTime();
+    draw(object, shaderProgram);
+    set_shader_uniform(shaderProgram, "time", (void *)&timee, UNIFORM_FLOAT);
+    glfw_routine(window);
   }
   destroy_object(&object);
   destroy_shader(&shaderProgram);

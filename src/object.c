@@ -71,8 +71,7 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
 
     GLErrCall (glBindVertexArray(0));
     GLErrCall (glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-  }
-  else {
+  } else {
     object->indexSize = 0;
     object->vertexCount = vertexCount;
     GLErrCall (glGenVertexArrays(1, &object->vaoId));
@@ -101,13 +100,12 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
   return object;
 }
 
-void destroy_object(Object* *object) {
+void destroy_object(Object **object) {
   if ((*object)->indicies) {
     GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
     GLErrCall (glDeleteBuffers(1, &(*object)->iboId));
-  }
-  else {
+  } else {
     GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
   }

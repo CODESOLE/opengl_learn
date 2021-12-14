@@ -27,34 +27,34 @@ void GLClearError(void) {
 bool GLLogCall(const char *funcName, const char *file, int line) {
   GLenum error;
   while ((error = glGetError())) {
-        switch (error) {
-        case 0x0500:
-            printf("[OpenGL Error] (GL_INVALID_ENUM)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0501:
-            printf("[OpenGL Error] (GL_INVALID_VALUE)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0502:
-            printf("[OpenGL Error] (GL_INVALID_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0503:
-            printf("[OpenGL Error] (GL_STACK_OVERFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0504:
-            printf("[OpenGL Error] (GL_STACK_UNDERDFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0505:
-            printf("[OpenGL Error] (GL_OUT_OF_MEMORY)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        case 0x0506:
-            printf("[OpenGL Error] (GL_INVALID_FRAMEBUFFER_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-            break;
-        default:
-            printf("[OpenGL Error] (UNKNOWN_ERR_CODE => 0x0%x)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", error, funcName, file, line);
-            break;
-        }
-      return false;
-    }
+      switch (error) {
+      case 0x0500:
+          printf("[OpenGL Error] (GL_INVALID_ENUM)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0501:
+          printf("[OpenGL Error] (GL_INVALID_VALUE)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0502:
+          printf("[OpenGL Error] (GL_INVALID_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0503:
+          printf("[OpenGL Error] (GL_STACK_OVERFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0504:
+          printf("[OpenGL Error] (GL_STACK_UNDERDFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0505:
+          printf("[OpenGL Error] (GL_OUT_OF_MEMORY)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      case 0x0506:
+          printf("[OpenGL Error] (GL_INVALID_FRAMEBUFFER_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
+          break;
+      default:
+          printf("[OpenGL Error] (UNKNOWN_ERR_CODE => 0x0%x)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", error, funcName, file, line);
+          break;
+      }
+    return false;
+  }
   return true;
 }
 
@@ -75,7 +75,7 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
   UNUSED(scancode); UNUSED(mods);
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-      glfwSetWindowShouldClose(window, GLFW_TRUE);
+    glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
 void gl_clear_color(vec4 clearColor) {
@@ -87,7 +87,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
   glfwSetErrorCallback(error_callback);
 
   if (!glfwInit())
-      exit(EXIT_FAILURE);
+    exit(EXIT_FAILURE);
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

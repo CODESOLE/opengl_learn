@@ -20,7 +20,6 @@
 
 #include "parse_shader.h"
 
-
 VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragmentS) {
   if ((vertexS == NULL) || (fragmentS == NULL)) {
     puts("vertex shader source or fragment shader source is cannot be NULL");
@@ -119,8 +118,7 @@ vertex:
         strncat(parsed_data->vertexShader, line, strlen(parsed_data->vertexShader) + strlen(line) + 1);
       }
 
-    }
-    else if (strncmp(line, "#fargment", 9) == 0) {
+    } else if (strncmp(line, "#fargment", 9) == 0) {
 fragment:
       fragmentFound = 1;
       while (fgets(line, MAX_READ_CHAR, file) != NULL) {
