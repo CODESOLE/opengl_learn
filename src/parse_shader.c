@@ -40,7 +40,7 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragme
   }
 
   FILE *vertexFile = fopen(vertexS, "r");
-  if(vertexFile == NULL) {
+  if (vertexFile == NULL) {
     fprintf(stderr, "Error opening file: %s\n", vertexS);
     return NULL;
   }
