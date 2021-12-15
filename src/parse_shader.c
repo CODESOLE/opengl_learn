@@ -109,7 +109,7 @@ vertex:
       vertexFound = 1;
       while (fgets(line, MAX_READ_CHAR, file) != NULL) {
         if (strncmp(line, "#fragment", 9) == 0)
-            goto fragment;
+          goto fragment;
 
         parsed_data->vertexShader = realloc(parsed_data->vertexShader,
                                             strlen(parsed_data->vertexShader) +
@@ -123,7 +123,7 @@ fragment:
       fragmentFound = 1;
       while (fgets(line, MAX_READ_CHAR, file) != NULL) {
         if (strncmp(line, "#vertex", 7) == 0)
-            goto vertex;
+          goto vertex;
 
         parsed_data->fragmentShader = realloc(parsed_data->fragmentShader,
                                               strlen(parsed_data->fragmentShader) +
