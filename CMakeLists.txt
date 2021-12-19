@@ -14,6 +14,7 @@ add_library(opengl_learn_objects OBJECT
   ${CMAKE_SOURCE_DIR}/src/object.c
   ${CMAKE_SOURCE_DIR}/src/parse_shader.c
   ${CMAKE_SOURCE_DIR}/src/shader_program.c
+  ${CMAKE_SOURCE_DIR}/src/texture.c
   ${CMAKE_SOURCE_DIR}/include/glad/glad.c
   )
 
@@ -24,12 +25,12 @@ if (MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
 
-    target_include_directories(opengl_learn_objects PUBLIC src include/glad include)
+    target_include_directories(opengl_learn_objects PUBLIC src include include/glad include)
     target_link_libraries(opengl_learn_objects ${CMAKE_SOURCE_DIR}/deps/windows/MSVC/glfw3dll.lib utilities)
 
     add_executable(opengl_learn WIN32 src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
 
-    target_include_directories(opengl_learn PUBLIC src include/glad include)
+    target_include_directories(opengl_learn PUBLIC src include include/glad include)
     target_link_libraries(opengl_learn ${CMAKE_SOURCE_DIR}/deps/windows/MSVC/glfw3dll.lib utilities)
 
     add_custom_command(TARGET opengl_learn POST_BUILD
@@ -50,11 +51,11 @@ elseif(UNIX AND NOT APPLE)
     add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors)
     find_package(glfw3 3.3 REQUIRED)
     find_package(OpenGL REQUIRED)
-    target_include_directories(opengl_learn_objects PUBLIC src include/glad )
+    target_include_directories(opengl_learn_objects PUBLIC src include include/glad )
     target_link_libraries(opengl_learn_objects glfw dl OpenGL::GL utilities)
 
     add_executable(opengl_learn src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
-    target_include_directories(opengl_learn PUBLIC src include/glad )
+    target_include_directories(opengl_learn PUBLIC src include include/glad )
     target_link_libraries(opengl_learn glfw OpenGL::GL dl utilities)
 
     add_custom_command(TARGET opengl_learn POST_BUILD

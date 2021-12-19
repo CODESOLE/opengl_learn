@@ -39,7 +39,8 @@ elseif(UNIX AND NOT APPLE)
       )
 
     target_compile_options(test_shader PRIVATE -Wall -Wextra -Werror -pedantic -pedantic-errors)
-    target_include_directories(test_shader PUBLIC src include/glad )
+    target_include_directories(test_shader PUBLIC src ${CMAKE_SOURCE_DIR}/include
+    						      ${CMAKE_SOURCE_DIR}/include/glad )
     target_link_libraries(test_shader glfw OpenGL::GL dl utilities)
 
     add_custom_command(TARGET test_shader POST_BUILD

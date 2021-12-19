@@ -27,6 +27,9 @@ in vec3 outPos;
 in vec3 outCol;
 in vec2 outUV;
 
+uniform sampler2D tex;
+uniform sampler2D tex2;
+
 void main() {
   vec2 u_dimensions = vec2(0.5f, 0.5f);
   float u_radius = 0.1;
@@ -37,5 +40,8 @@ void main() {
       length(coords - u_dimensions) < u_radius) {
     discard;
   }
-  gl_FragColor = vec4(abs(sin(2 * time)), abs(cos(2 * time)), 0.9, 1.0);
+
+  vec4 img = mix(texture(tex, outUV), texture(tex2, outUV), 0.3);
+
+  gl_FragColor = img * vec4(abs(sin(2 * time)), abs(cos(2 * time)), 0.9, 1.0);
 }

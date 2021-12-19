@@ -25,16 +25,18 @@
 #include <stdio.h>
 
 typedef struct {
-	GLuint *indicies;
-	float  *vertexBufferData;
-	GLuint *countOfEachAttr;
-	size_t  indexSize;
-	size_t  bufferSize;
-	GLuint  numberOfAttr;
-	size_t  vertexCount;
-	GLuint  vaoId;
-	GLuint  vboId;
-	GLuint  iboId;
+  GLuint *indicies;
+  float  *vertexBufferData;
+  GLuint *countOfEachAttr;
+  size_t  indexSize;
+  size_t  bufferSize;
+  GLuint  numberOfAttr;
+  size_t  vertexCount;
+  GLuint  textures[64];
+  GLuint  num_textures;
+  GLuint  vaoId;
+  GLuint  vboId;
+  GLuint  iboId;
 } Object;
 
 Object *create_object(void *vertexBufferData, size_t bufferSize,

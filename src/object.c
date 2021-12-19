@@ -21,7 +21,6 @@
 #include "object.h"
 #include "common.h"
 
-
 Object *create_object (void *vertexBufferData, size_t bufferSize,
                        GLuint *indicies, size_t indexSize, size_t vertexCount,
                        GLuint *arrayOfAttr, GLuint numberOfAttr) {
@@ -36,11 +35,14 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
     printf("[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
     return NULL;
   }
+
+  object->num_textures = 0;
   object->indicies = indicies;
   object->vertexBufferData = vertexBufferData;
   object->countOfEachAttr = arrayOfAttr;
   object->bufferSize = bufferSize;
   object->numberOfAttr = numberOfAttr;
+
   if (indicies) {
     object->indexSize = indexSize;
 
@@ -105,6 +107,7 @@ void destroy_object(Object **object) {
     GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
     GLErrCall (glDeleteBuffers(1, &(*object)->iboId));
+    GLErrCall (glDeleteTextures((*object)->num_textures, (*object)->textures));
   } else {
     GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
