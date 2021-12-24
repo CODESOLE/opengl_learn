@@ -69,7 +69,7 @@ void error_callback(int error, const char *description) {
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   UNUSED (window);
-  GLErrCall (glViewport(0, 0, width, height));
+  GLErrCall(glViewport(0, 0, width, height));
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
@@ -79,8 +79,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 }
 
 void gl_clear_color(vec4 clearColor) {
-  GLErrCall (glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]));
-  GLErrCall (glClear(GL_COLOR_BUFFER_BIT));
+  GLErrCall(glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]));
+  GLErrCall(glClear(GL_COLOR_BUFFER_BIT));
 }
 
 GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {

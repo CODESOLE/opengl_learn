@@ -29,7 +29,7 @@ float vertices[] = {
     -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
     -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
 };
-unsigned int indices[] = {  // note that we start from 0!
+unsigned int indices[] = {
     0, 1, 3,  // first Triangle
     1, 2, 3   // second Triangle
 };
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
   const char *default_shader_file = "shaders/sample.shader";
 
   if (argc >= 2) {
-    if (argv[1] != NULL && strstr(argv[1], "..\0") == NULL)
+    if (argv[1] != NULL && strstr(argv[1], "..") == NULL)
       strncpy(shader_file, argv[1], 127);
     else
       strncpy(shader_file, default_shader_file, 127);
@@ -49,14 +49,14 @@ int main(int argc, char **argv) {
     shader_file[127] = '\0';
   }
 
-  GLFWwindow *window = init_glfw_glad(640, 480, "NWE");
+  GLFWwindow *window = init_glfw_glad(640, 480, "opengl_learn");
   int width = 0, height = 0;
   ShaderProgram *shaderProgram = create_shader_program(shader_file);
   Object *object = create_object(vertices, sizeof(vertices), indices,
                                  sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
 
   int w = 0, h = 0;
-  GLuint tex_ = load_texture("shaders/archlogo.png", &w, &h);
+  GLuint tex_ = load_texture("shaders/arch2.png", &w, &h);
   bind_texture_to_object(object, tex_);
   GLuint tex2_ = load_texture("shaders/arch.png", &w, &h);
   bind_texture_to_object(object, tex2_);

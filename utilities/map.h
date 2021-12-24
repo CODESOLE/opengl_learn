@@ -124,7 +124,7 @@ nonposix_strdup(const char *src)
 }
 
 #define create_pair_with_string_key(pair_name, str, val)                      \
-  pair *(pair_name) = (pair *)malloc (sizeof (pair));                         \
+  pair *(pair_name) = (pair *)malloc (sizeof(pair));                         \
   (pair_name)->key = (void *)nonposix_strdup ((str));                                  \
   (pair_name)->value = (void *)(val)
 
@@ -196,7 +196,7 @@ map_delete_at (Map *m, size_t index)
         {
           m->capacity /= 2;
           m->pairs
-              = (pair **)realloc (m->pairs, sizeof (pair *) * m->capacity);
+              = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
           if (m->pairs == NULL)
             {
               puts ("memory allocation failed!");
@@ -269,7 +269,7 @@ map_push_back (Map *m, pair *p)
         m->capacity = 2;
       else
         m->capacity *= 2;
-      m->pairs = (pair **)realloc (m->pairs, sizeof (pair *) * m->capacity);
+      m->pairs = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
       if (m->pairs == NULL)
         {
           puts ("memory allocation failed!");
@@ -295,7 +295,7 @@ map_push_back_with_string_key (Map *m, const char *keyString, void *d)
         m->capacity = 2;
       else
         m->capacity *= 2;
-      m->pairs = (pair **)realloc (m->pairs, sizeof (pair *) * m->capacity);
+      m->pairs = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
       if (m->pairs == NULL)
         {
           puts ("memory allocation failed!");
@@ -323,7 +323,7 @@ init_map (MapType mapType)
         return NULL;
     }
 
-  Map *m = (Map *)malloc (sizeof (Map));
+  Map *m = (Map *)malloc (sizeof(Map));
 
   if (!m)
     {
@@ -336,7 +336,7 @@ init_map (MapType mapType)
   else if (mapType == MAP_STACK)
       m->memberType[0] = 's';
 
-  m->pairs = (pair **)calloc (2, sizeof (pair *));
+  m->pairs = (pair **)calloc (2, sizeof(pair *));
 
   if (!m->pairs)
     puts ("memory allocation failed!");

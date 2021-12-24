@@ -41,7 +41,8 @@ void main() {
     discard;
   }
 
-  vec4 img = mix(texture(tex, outUV), texture(tex2, outUV), 0.3);
+  vec4 img = mix(texture(tex, outUV), texture(tex2, outUV), 0.5);
 
-  gl_FragColor = img * vec4(abs(sin(2 * time)), abs(cos(2 * time)), 0.9, 1.0);
+  gl_FragColor = img;
+  //vec4(abs(sin(2 * time)), abs(cos(2 * time)), 0.9, 1.0);
 }

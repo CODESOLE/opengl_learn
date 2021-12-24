@@ -51,41 +51,41 @@ ShaderProgram *create_shader_program(const char *shaderFileName) {
     exit(EXIT_FAILURE);
   }
 
-  GLErrCall (GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER));
-  GLErrCall (glShaderSource(vertexShader, 1, (const char **)&vertFragSource->vertexShader, NULL));
-  GLErrCall (glCompileShader(vertexShader));
+  GLErrCall(GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER));
+  GLErrCall(glShaderSource(vertexShader, 1, (const char **)&vertFragSource->vertexShader, NULL));
+  GLErrCall(glCompileShader(vertexShader));
 
   int success = 0;
   char infoLog[512] = { 0 };
-  GLErrCall (glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
+  GLErrCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
+    GLErrCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
     printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
-  GLErrCall (glShaderSource(fragmentShader, 1, (const char **)&vertFragSource->fragmentShader, NULL));
-  GLErrCall (glCompileShader(fragmentShader));
+  GLErrCall(GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
+  GLErrCall(glShaderSource(fragmentShader, 1, (const char **)&vertFragSource->fragmentShader, NULL));
+  GLErrCall(glCompileShader(fragmentShader));
 
-  GLErrCall (glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
+  GLErrCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
+    GLErrCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
     printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (shaderProgram->shaderProgramID = glCreateProgram());
-  GLErrCall (glAttachShader(shaderProgram->shaderProgramID, vertexShader));
-  GLErrCall (glAttachShader(shaderProgram->shaderProgramID, fragmentShader));
-  GLErrCall (glLinkProgram(shaderProgram->shaderProgramID));
+  GLErrCall(shaderProgram->shaderProgramID = glCreateProgram());
+  GLErrCall(glAttachShader(shaderProgram->shaderProgramID, vertexShader));
+  GLErrCall(glAttachShader(shaderProgram->shaderProgramID, fragmentShader));
+  GLErrCall(glLinkProgram(shaderProgram->shaderProgramID));
 
-  GLErrCall (glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
+  GLErrCall(glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
+    GLErrCall(glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
     printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (glDeleteShader(vertexShader));
-  GLErrCall (glDeleteShader(fragmentShader));
+  GLErrCall(glDeleteShader(vertexShader));
+  GLErrCall(glDeleteShader(fragmentShader));
 
   free(vertFragSource->vertexShader);
   free(vertFragSource->fragmentShader);
@@ -104,41 +104,41 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
     exit(EXIT_FAILURE);
   }
 
-  GLErrCall (GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER));
-  GLErrCall (glShaderSource(vertexShader, 1, (const char **)&vertFragSource->vertexShader, NULL));
-  GLErrCall (glCompileShader(vertexShader));
+  GLErrCall(GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER));
+  GLErrCall(glShaderSource(vertexShader, 1, (const char **)&vertFragSource->vertexShader, NULL));
+  GLErrCall(glCompileShader(vertexShader));
 
   int success = 0;
   char infoLog[512] = { 0 };
-  GLErrCall (glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
+  GLErrCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
+    GLErrCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
     printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
-  GLErrCall (glShaderSource(fragmentShader, 1, (const char **)&vertFragSource->fragmentShader, NULL));
-  GLErrCall (glCompileShader(fragmentShader));
+  GLErrCall(GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
+  GLErrCall(glShaderSource(fragmentShader, 1, (const char **)&vertFragSource->fragmentShader, NULL));
+  GLErrCall(glCompileShader(fragmentShader));
 
-  GLErrCall (glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
+  GLErrCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
+    GLErrCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
     printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (shaderProgram->shaderProgramID = glCreateProgram());
-  GLErrCall (glAttachShader(shaderProgram->shaderProgramID, vertexShader));
-  GLErrCall (glAttachShader(shaderProgram->shaderProgramID, fragmentShader));
-  GLErrCall (glLinkProgram(shaderProgram->shaderProgramID));
+  GLErrCall(shaderProgram->shaderProgramID = glCreateProgram());
+  GLErrCall(glAttachShader(shaderProgram->shaderProgramID, vertexShader));
+  GLErrCall(glAttachShader(shaderProgram->shaderProgramID, fragmentShader));
+  GLErrCall(glLinkProgram(shaderProgram->shaderProgramID));
 
-  GLErrCall (glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
+  GLErrCall(glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
   if (!success) {
-    GLErrCall (glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
+    GLErrCall(glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
     printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
   }
 
-  GLErrCall (glDeleteShader(vertexShader));
-  GLErrCall (glDeleteShader(fragmentShader));
+  GLErrCall(glDeleteShader(vertexShader));
+  GLErrCall(glDeleteShader(fragmentShader));
 
   free(vertFragSource->vertexShader);
   free(vertFragSource->fragmentShader);
@@ -148,15 +148,15 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
 }
 
 void use_shader(ShaderProgram *shaderProgram) {
-  GLErrCall (glUseProgram (shaderProgram->shaderProgramID));
+  GLErrCall(glUseProgram (shaderProgram->shaderProgramID));
 }
 
 void unuse_shader(void) {
-  GLErrCall (glUseProgram (0));
+  GLErrCall(glUseProgram (0));
 }
 
 void destroy_shader(ShaderProgram **shaderProgram) {
-  GLErrCall (glDeleteProgram ((*shaderProgram)->shaderProgramID));
+  GLErrCall(glDeleteProgram ((*shaderProgram)->shaderProgramID));
   map_destroy((*shaderProgram)->uniformCache);
   free(*shaderProgram);
   *shaderProgram = NULL;

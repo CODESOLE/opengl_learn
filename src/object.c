@@ -29,7 +29,7 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
     return NULL;
   }
 
-  Object *object = malloc(sizeof (Object));
+  Object *object = malloc(sizeof(Object));
 
   if (!object) {
     printf("[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
@@ -46,16 +46,16 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
   if (indicies) {
     object->indexSize = indexSize;
 
-    GLErrCall (glGenVertexArrays(1, &object->vaoId));
-    GLErrCall (glGenBuffers(1, &object->vboId));
-    GLErrCall (glGenBuffers(1, &object->iboId));
+    GLErrCall(glGenVertexArrays(1, &object->vaoId));
+    GLErrCall(glGenBuffers(1, &object->vboId));
+    GLErrCall(glGenBuffers(1, &object->iboId));
 
-    GLErrCall (glBindVertexArray(object->vaoId));
-    GLErrCall (glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
-    GLErrCall (glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
+    GLErrCall(glBindVertexArray(object->vaoId));
+    GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
+    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
 
-    GLErrCall (glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object->iboId));
-    GLErrCall (glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize, object->indicies, GL_STATIC_DRAW));
+    GLErrCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object->iboId));
+    GLErrCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize, object->indicies, GL_STATIC_DRAW));
 
     {
       GLuint size = 0, offset = 0;
@@ -63,25 +63,25 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
         size += object->countOfEachAttr[i];
 
       for (GLuint i = 0; i < object->numberOfAttr; i++) {
-        GLErrCall (glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)(uintptr_t)offset));
-        GLErrCall (glEnableVertexAttribArray(i));
-        offset += object->countOfEachAttr[i] * sizeof (float);
+        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)(uintptr_t)offset));
+        GLErrCall(glEnableVertexAttribArray(i));
+        offset += object->countOfEachAttr[i] * sizeof(float);
       }
     }
 
-    GLErrCall (glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 
-    GLErrCall (glBindVertexArray(0));
-    GLErrCall (glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+    GLErrCall(glBindVertexArray(0));
+    GLErrCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
   } else {
     object->indexSize = 0;
     object->vertexCount = vertexCount;
-    GLErrCall (glGenVertexArrays(1, &object->vaoId));
-    GLErrCall (glGenBuffers(1, &object->vboId));
+    GLErrCall(glGenVertexArrays(1, &object->vaoId));
+    GLErrCall(glGenBuffers(1, &object->vboId));
 
-    GLErrCall (glBindVertexArray(object->vaoId));
-    GLErrCall (glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
-    GLErrCall (glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
+    GLErrCall(glBindVertexArray(object->vaoId));
+    GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
+    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
 
     {
       GLuint size = 0, offset = 0;
@@ -89,28 +89,28 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
         size += object->countOfEachAttr[i];
 
       for (GLuint i = 0; i < object->numberOfAttr; i++) {
-        GLErrCall (glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)&offset));
-        GLErrCall (glEnableVertexAttribArray(i));
-        offset += object->countOfEachAttr[i] * sizeof (float);
+        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)&offset));
+        GLErrCall(glEnableVertexAttribArray(i));
+        offset += object->countOfEachAttr[i] * sizeof(float);
       }
     }
 
-    GLErrCall (glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 
-    GLErrCall (glBindVertexArray(0));
+    GLErrCall(glBindVertexArray(0));
   }
   return object;
 }
 
 void destroy_object(Object **object) {
   if ((*object)->indicies) {
-    GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
-    GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
-    GLErrCall (glDeleteBuffers(1, &(*object)->iboId));
-    GLErrCall (glDeleteTextures((*object)->num_textures, (*object)->textures));
+    GLErrCall(glDeleteVertexArrays(1, &(*object)->vaoId));
+    GLErrCall(glDeleteBuffers(1, &(*object)->vboId));
+    GLErrCall(glDeleteBuffers(1, &(*object)->iboId));
+    GLErrCall(glDeleteTextures((*object)->num_textures, (*object)->textures));
   } else {
-    GLErrCall (glDeleteVertexArrays(1, &(*object)->vaoId));
-    GLErrCall (glDeleteBuffers(1, &(*object)->vboId));
+    GLErrCall(glDeleteVertexArrays(1, &(*object)->vaoId));
+    GLErrCall(glDeleteBuffers(1, &(*object)->vboId));
   }
   free(*object);
   *object = NULL;

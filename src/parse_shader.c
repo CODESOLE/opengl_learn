@@ -46,7 +46,7 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragme
   }
 
   char line[MAX_READ_CHAR] = { 0 };
-  VertexFragmentShader *parsed_data = calloc(1, sizeof (VertexFragmentShader));
+  VertexFragmentShader *parsed_data = calloc(1, sizeof(VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
   strcpy(parsed_data->vertexShader, "");
   parsed_data->fragmentShader = malloc(1);
@@ -96,7 +96,7 @@ VertexFragmentShader *parse_shader(const char *shader_file) {
   }
 
   char line[MAX_READ_CHAR] = { 0 };
-  VertexFragmentShader *parsed_data = calloc(1, sizeof (VertexFragmentShader));
+  VertexFragmentShader *parsed_data = calloc(1, sizeof(VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
   strcpy(parsed_data->vertexShader, "");
   parsed_data->fragmentShader = malloc(1);
