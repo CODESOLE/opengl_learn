@@ -8,6 +8,7 @@
 /buildMSBuild
 /buildMake
 /build
+.build*
 /coverage/*
 !/coverage/Makefile
 compile_commands.json
