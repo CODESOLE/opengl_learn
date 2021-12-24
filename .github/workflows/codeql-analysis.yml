@@ -34,7 +34,7 @@ jobs:
       run: sudo apt update && sudo apt install libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev ninja-build pkg-config libx11-dev
       
     - name: Configure CMake
-      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -G Ninja -DCMAKE_INSTALL_PREFIX=. -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
