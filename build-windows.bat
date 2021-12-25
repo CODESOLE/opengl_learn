@@ -3,6 +3,7 @@
 setlocal EnableDelayedExpansion
 
 set CC="gcc" 
+set INSTALL_PREFIX="./buildNinja"
 
 IF [%2]==[] (
 IF NOT "%1"=="msbuild" (
@@ -46,7 +47,7 @@ IF EXIST !folder! (
     cd /d !folder!
     for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
-    cmake.exe -G Ninja -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+    cmake.exe -G Ninja -DCMAKE_INSTALL_PREFIX=!INSTALL_PREFIX! -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
 
     cmake --build .
 )
@@ -69,7 +70,7 @@ IF EXIST !folder! (
     cd /d !folder!
     for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
-    cmake.exe -G Ninja -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+    cmake.exe -G Ninja -DCMAKE_INSTALL_PREFIX=!INSTALL_PREFIX! -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
 
     cmake --build .
 )
@@ -92,7 +93,7 @@ IF EXIST !folder! (
     cd /d !folder!
     for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
-    cmake.exe -G "Unix Makefiles" -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+    cmake.exe -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=!INSTALL_PREFIX! -DCMAKE_C_COMPILER=!CC! -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
 
     cmake --build .
 )
@@ -115,7 +116,7 @@ IF EXIST !folder! (
     cd /d !folder!
     for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
-    cmake.exe ..
+    cmake.exe -DCMAKE_INSTALL_PREFIX=!INSTALL_PREFIX! ..
 
     cmake --build .
 )

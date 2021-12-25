@@ -1,5 +1,7 @@
 #!/bin/sh
 
+INSTALL_PREFIX=./buildNinja
+
 if [ -z "$2" ]
 then
   printf "\nCOMPILER NOT SPECIFIED. BUILDING WITH GCC DEFAULT\n"
@@ -19,18 +21,18 @@ then
   mkdir -p buildNinja
   rm -rfd buildNinja/*
   cd buildNinja
-  cmake -G Ninja -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && ninja
+  cmake -G Ninja -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && ninja
 elif [ "$1" = "ninja" ]
 then
   printf "\nBUILDING WITH NINJA\n"
   mkdir -p buildNinja
   rm -rfd buildNinja/*
   cd buildNinja
-  cmake -G Ninja -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && ninja
+  cmake -G Ninja -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && ninja
 else
   printf "\nBUILDING WITH MAKE\n"
   mkdir -p buildMake
   rm -rfd buildMake/*
   cd buildMake
-  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && make
+  cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_C_COMPILER=${CC} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && make
 fi
