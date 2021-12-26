@@ -3,7 +3,7 @@
 setlocal EnableDelayedExpansion
 
 set CC="gcc" 
-set INSTALL_PREFIX="./buildNinja"
+set INSTALL_PREFIX=".\buildNinja"
 
 IF [%2]==[] (
 IF NOT "%1"=="msbuild" (
