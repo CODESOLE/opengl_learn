@@ -118,12 +118,6 @@ else()
 
 endif()
 
-install(TARGETS opengl_learn DESTINATION ${CMAKE_INSTALL_PREFIX})
-
-add_custom_command(TARGET opengl_learn POST_BUILD
-               COMMAND ${CMAKE_COMMAND} -E copy_directory
-               ${CMAKE_SOURCE_DIR}/shaders/ ${CMAKE_INSTALL_PREFIX}/shaders)
-
 enable_testing()
 
 add_subdirectory(tests)
