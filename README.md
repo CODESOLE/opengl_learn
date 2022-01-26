@@ -65,4 +65,4 @@ Run ```build-linux.sh <target-build-system>``` target build system can be ninja 
 If you are not specify the build-target, it will choose ninja as default.
 
 # LICENSE
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![gpl-3.0](https://www.gnu.org/graphics/gplv3-with-text-136x68.png)](https://www.gnu.org/licenses/gpl-3.0)
