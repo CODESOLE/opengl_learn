@@ -25,7 +25,7 @@ if (MSVC)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
 
-  target_include_directories(opengl_learn_objects PUBLIC src include include/glad include)
+  target_include_directories(opengl_learn_objects PUBLIC src include/glad include)
   target_link_libraries(opengl_learn_objects ${CMAKE_SOURCE_DIR}/deps/windows/MSVC/glfw3dll.lib utilities)
 
   add_executable(opengl_learn WIN32 src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
