@@ -36,7 +36,7 @@ ECHO.
 ECHO BUILD SYSTEM NOT SPECIFIED. BUILDING WITH NINJA DEFAULT
 ECHO.
 
-set folder=".\buildNinja"
+set folder=".\build"
 
 IF NOT EXIST !folder! (
     md !folder!
@@ -59,7 +59,7 @@ ECHO.
 ECHO BUILDING WITH NINJA
 ECHO.
 
-set folder=".\buildNinja"
+set folder=".\build"
 
 IF NOT EXIST !folder! (
     md !folder!
@@ -82,7 +82,7 @@ ECHO.
 ECHO BUILDING WITH MAKE
 ECHO.
 
-set folder=".\buildMake"
+set folder=".\build"
 
 IF NOT EXIST !folder! (
     md !folder!
