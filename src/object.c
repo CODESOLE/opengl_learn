@@ -22,7 +22,7 @@
 #include "common.h"
 
 Object *create_object (void *vertexBufferData, size_t bufferSize,
-                       GLuint *indicies, size_t indexSize, size_t vertexCount,
+                       GLuint *indices, size_t indexSize, size_t vertexCount,
                        GLuint *arrayOfAttr, GLuint numberOfAttr) {
   if (!vertexBufferData || !arrayOfAttr) {
     printf("[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n", __FILE__, __LINE__);
@@ -37,13 +37,13 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
   }
 
   object->num_textures = 0;
-  object->indicies = indicies;
+  object->indices = indices;
   object->vertexBufferData = vertexBufferData;
   object->countOfEachAttr = arrayOfAttr;
   object->bufferSize = bufferSize;
   object->numberOfAttr = numberOfAttr;
 
-  if (indicies) {
+  if (indices) {
     object->indexSize = indexSize;
 
     GLErrCall(glGenVertexArrays(1, &object->vaoId));
@@ -55,7 +55,7 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
     GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
 
     GLErrCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object->iboId));
-    GLErrCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize, object->indicies, GL_STATIC_DRAW));
+    GLErrCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize, object->indices, GL_STATIC_DRAW));
 
     {
       GLuint size = 0, offset = 0;
@@ -103,7 +103,7 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
 }
 
 void destroy_object(Object **object) {
-  if ((*object)->indicies) {
+  if ((*object)->indices) {
     GLErrCall(glDeleteVertexArrays(1, &(*object)->vaoId));
     GLErrCall(glDeleteBuffers(1, &(*object)->vboId));
     GLErrCall(glDeleteBuffers(1, &(*object)->iboId));

@@ -25,7 +25,7 @@
 #include <stdio.h>
 
 typedef struct {
-  GLuint *indicies;
+  GLuint *indices;
   float  *vertexBufferData;
   GLuint *countOfEachAttr;
   size_t  indexSize;
@@ -40,7 +40,7 @@ typedef struct {
 } Object;
 
 Object *create_object(void *vertexBufferData, size_t bufferSize,
-                      GLuint *indicies, size_t indexSize, size_t vertexCount,
+                      GLuint *indices, size_t indexSize, size_t vertexCount,
                       GLuint *arrayOfAttr, GLuint numberOfAttr);
 
 void destroy_object(Object **object);
