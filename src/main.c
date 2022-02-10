@@ -36,7 +36,7 @@ unsigned int indices[] = {
 
 int main(int argc, char **argv) {
   char shader_file[128] = { 0 };
-  const char *default_shader_file = "shaders/sample.shader";
+  const char *default_shader_file = "shaders/sample.glsl";
 
   if (argc >= 2) {
     if (argv[1] != NULL && strstr(argv[1], "..") == NULL)

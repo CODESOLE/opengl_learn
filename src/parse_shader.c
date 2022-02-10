@@ -33,7 +33,6 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragme
     puts("File should be ended with .vs!");
     return NULL;
   }
-
   if (strncmp(fragmentS + strlen(fragmentS) - 3, ".fs", 3) != 0) {
     puts("File should be ended with .fs!");
     return NULL;
@@ -80,12 +79,12 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragme
 }
 
 VertexFragmentShader *parse_shader(const char *shader_file) {
-  if (strlen(shader_file) < 8) {
+  if (strlen(shader_file) < 6) {
     puts("Invalid file!");
     return NULL;
   }
-  if (strncmp(shader_file + strlen(shader_file) - 7, ".shader", 7) != 0) {
-    puts("File should be ended with .shader!");
+  if (strncmp(shader_file + strlen(shader_file) - 5, ".glsl", 5) != 0) {
+    puts("File should be ended with .glsl!");
     return NULL;
   }
 
