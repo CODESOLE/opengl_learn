@@ -52,8 +52,7 @@ int main(int argc, char **argv) {
   GLFWwindow *window = init_glfw_glad(640, 480, "opengl_learn");
   int width = 0, height = 0;
   ShaderProgram *shaderProgram = create_shader_program(shader_file);
-  Object *object = create_object(vertices, sizeof(vertices), indices,
-                                 sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
+  Object *object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
 
   int w = 0, h = 0;
   GLuint tex_ = load_texture("shaders/arch2.png", &w, &h);
