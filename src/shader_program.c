@@ -169,7 +169,7 @@ void set_shader_uniform(ShaderProgram *shaderProgram, const char *uniformName,
 
 void set_shader_uniform_v(ShaderProgram *shaderProgram, const char *uniformName,
                           const void *value, ShaderUniformDataType uniformType, GLuint count) {
-  glUseProgram(shaderProgram->shaderProgramID);
+  use_shader(shaderProgram);
   GLint loc = check_and_get_uniform(shaderProgram, uniformName);
   if (loc == -1) return;
 

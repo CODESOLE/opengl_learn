@@ -55,9 +55,9 @@ int main(int argc, char **argv) {
   Object *object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
 
   int w = 0, h = 0;
-  GLuint tex_ = load_texture("shaders/arch2.png", &w, &h);
+  GLuint tex_ = load_texture("shaders/img1.png", &w, &h);
   bind_texture_to_object(object, tex_);
-  GLuint tex2_ = load_texture("shaders/arch.png", &w, &h);
+  GLuint tex2_ = load_texture("shaders/img2.png", &w, &h);
   bind_texture_to_object(object, tex2_);
   set_shader_uniform(shaderProgram, "tex", (void *)&tex_, UNIFORM_SAMPLER2D);
   set_shader_uniform(shaderProgram, "tex2", (void *)&tex2_, UNIFORM_SAMPLER2D);

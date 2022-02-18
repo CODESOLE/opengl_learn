@@ -38,7 +38,7 @@ GLuint load_texture(const char *tex_path, int *w, int *h) {
   unsigned char *img_data = stbi_load(tex_path, w, h, &num_channnel, 0);
 
   if (img_data) {
-    GLErrCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *w, *h, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data));
+    GLErrCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *w, *h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img_data));
     GLErrCall(glGenerateMipmap(GL_TEXTURE_2D));
   } else {
     printf("[%s:%d]ERR::TEXTURE::LOAD::FAILED\n", __FILE__, __LINE__);
