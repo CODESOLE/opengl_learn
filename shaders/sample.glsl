@@ -31,18 +31,7 @@ uniform sampler2D tex;
 uniform sampler2D tex2;
 
 void main() {
-  vec2 u_dimensions = vec2(0.5f, 0.5f);
-  float u_radius = 0.1;
-  vec2 coords = outUV * u_dimensions;
-  if (length(coords - vec2(0)) < u_radius ||
-      length(coords - vec2(0, u_dimensions.y)) < u_radius ||
-      length(coords - vec2(u_dimensions.x, 0)) < u_radius ||
-      length(coords - u_dimensions) < u_radius) {
-    discard;
-  }
-
   vec4 img = mix(texture(tex, outUV), texture(tex2, outUV), 0.5);
 
   gl_FragColor = img;
-  //vec4(abs(sin(2 * time)), abs(cos(2 * time)), 0.9, 1.0);
 }
