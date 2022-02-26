@@ -25,18 +25,19 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
                        GLuint *indices, size_t indexSize, size_t vertexCount,
                        GLuint *arrayOfAttr, GLuint numberOfAttr) {
   if (!vertexBufferData || !arrayOfAttr) {
-    printf("[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n", __FILE__, __LINE__);
+    fprintf(stderr, "[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n", __FILE__, __LINE__);
     return NULL;
   }
 
   Object *object = malloc(sizeof(Object));
 
   if (!object) {
-    printf("[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
+    fprintf(stderr, "[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
     return NULL;
   }
 
   object->num_textures = 0;
+  object->vertexCount = vertexCount;
   object->indices = indices;
   object->vertexBufferData = vertexBufferData;
   object->countOfEachAttr = arrayOfAttr;
