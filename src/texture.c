@@ -41,7 +41,7 @@ GLuint load_texture(const char *tex_path, int *w, int *h) {
     GLErrCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *w, *h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img_data));
     GLErrCall(glGenerateMipmap(GL_TEXTURE_2D));
   } else {
-    printf("[%s:%d]ERR::TEXTURE::LOAD::FAILED\n", __FILE__, __LINE__);
+    perror("ERR::TEXTURE::LOAD::FAILED");
   }
 
   stbi_image_free(img_data);

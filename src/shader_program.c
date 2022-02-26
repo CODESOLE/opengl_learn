@@ -46,8 +46,8 @@ ShaderProgram *create_shader_program(const char *shaderFileName) {
   shaderProgram->uniformCache = init_map(MAP_HEAP);
   VertexFragmentShader *vertFragSource = parse_shader(shaderFileName);
 
-  if (vertFragSource->fragmentShader == NULL && vertFragSource->vertexShader == NULL) {
-    puts("ERR::Cannot parse shader source file");
+  if (vertFragSource->fragmentShader == NULL || vertFragSource->vertexShader == NULL) {
+    perror("ERR::Cannot parse shader source file");
     exit(EXIT_FAILURE);
   }
 
@@ -60,7 +60,7 @@ ShaderProgram *create_shader_program(const char *shaderFileName) {
   GLErrCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
   if (!success) {
     GLErrCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
-    printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
@@ -70,7 +70,7 @@ ShaderProgram *create_shader_program(const char *shaderFileName) {
   GLErrCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
   if (!success) {
     GLErrCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
-    printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(shaderProgram->shaderProgramID = glCreateProgram());
@@ -81,7 +81,7 @@ ShaderProgram *create_shader_program(const char *shaderFileName) {
   GLErrCall(glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
   if (!success) {
     GLErrCall(glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
-    printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(glDeleteShader(vertexShader));
@@ -99,8 +99,8 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
   shaderProgram->uniformCache = init_map(MAP_HEAP);
   VertexFragmentShader *vertFragSource = parse_shader_vs_fs(vertexSource, fragmentSource);
 
-  if (vertFragSource->fragmentShader == NULL && vertFragSource->vertexShader == NULL) {
-    puts("ERR::Cannot parse shader source file");
+  if (vertFragSource->fragmentShader == NULL || vertFragSource->vertexShader == NULL) {
+    perror("ERR::Cannot parse shader source file");
     exit(EXIT_FAILURE);
   }
 
@@ -113,7 +113,7 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
   GLErrCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
   if (!success) {
     GLErrCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
-    printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
@@ -123,7 +123,7 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
   GLErrCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
   if (!success) {
     GLErrCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
-    printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(shaderProgram->shaderProgramID = glCreateProgram());
@@ -134,7 +134,7 @@ ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char 
   GLErrCall(glGetProgramiv(shaderProgram->shaderProgramID, GL_LINK_STATUS, &success));
   if (!success) {
     GLErrCall(glGetProgramInfoLog(shaderProgram->shaderProgramID, 512, NULL, infoLog));
-    printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
+    fprintf(stderr, "ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
   }
 
   GLErrCall(glDeleteShader(vertexShader));
@@ -202,6 +202,6 @@ void set_shader_uniform_v(ShaderProgram *shaderProgram, const char *uniformName,
     glUniform1iv(loc, count, (int *)value);
     break;
   default:
-    printf("SHADER: [ID %u] Failed to set uniform, data type not recognized\n", shaderProgram->shaderProgramID);
+    fprintf(stderr, "SHADER: [ID %u] Failed to set uniform, data type not recognized\n", shaderProgram->shaderProgramID);
   }
 }
