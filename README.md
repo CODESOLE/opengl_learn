@@ -25,7 +25,11 @@ OpenGL experimenting repo.
 git clone https://https://github.com/CODESOLE/opengl_learn.git
 ```
 # Linux Specific Dependencies
-For Ubuntu you can install dependencies with this command : ```sudo apt update && sudo apt upgrade && sudo apt install libglfw3 libglfw3-dev libxcursor-dev libxinerama-dev libxrandr-dev build-essential cmake libxi-dev ninja-build pkg-config libx11-dev```. Install them according to your distribution package name.
+ - GLFW
+ - GCC
+ - CMake
+
+Install them according to your distribution package name.
 
 # Build Instructions For WINDOWS
 Run ```build-windows.bat <target-build-system> <Compiler-Collection>``` target build system can be ninja, make or msbuild. Compiler-Collection can be gcc or clang If your target-build-system is make or ninja other than msbuild. For example:
