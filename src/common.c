@@ -24,7 +24,7 @@ void GLClearError(void) {
   while (glGetError() != GL_NO_ERROR);
 }
 
-bool GLLogCall(const char *funcName, const char *file, int line) {
+_Bool GLLogCall(const char *funcName, const char *file, int line) {
   GLenum error;
   while ((error = glGetError())) {
       switch (error) {
@@ -53,9 +53,9 @@ bool GLLogCall(const char *funcName, const char *file, int line) {
           printf("[OpenGL Error] (UNKNOWN_ERR_CODE => 0x0%x)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", error, funcName, file, line);
           break;
       }
-    return false;
+    return 0;
   }
-  return true;
+  return 1;
 }
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos) {}
@@ -97,6 +97,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
   GLFWwindow *window = glfwCreateWindow(width, height, windowName, NULL, NULL);
 
   if (!window) {
+    perror("ERR::WINDOW::CREATION::FAILED");
     glfwTerminate();
     exit(EXIT_FAILURE);
   }

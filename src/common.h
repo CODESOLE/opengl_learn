@@ -27,7 +27,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include "linmath.h"
 #include "object.h"
 #include "debugbreak.h"
@@ -52,7 +51,7 @@
 
 void GLClearError(void);
 
-bool GLLogCall(const char *funcName, const char *file, int line);
+_Bool GLLogCall(const char *funcName, const char *file, int line);
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
