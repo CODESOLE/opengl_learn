@@ -34,7 +34,7 @@ GLuint load_texture(const char *tex_path, int *w, int *h) {
   GLErrCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
   GLErrCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
-  stbi_set_flip_vertically_on_load(true);
+  stbi_set_flip_vertically_on_load(1);
   unsigned char *img_data = stbi_load(tex_path, w, h, &num_channnel, 0);
 
   if (img_data) {
