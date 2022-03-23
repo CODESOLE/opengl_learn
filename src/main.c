@@ -16,26 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "linmath.h"
-#include "shader_program.h"
-#include "object.h"
-#include "texture.h"
 #include "draw.h"
+#include "linmath.h"
+#include "object.h"
+#include "shader_program.h"
+#include "texture.h"
 
 float vertices[] = {
     // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+    0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+    0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+    -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
 };
 unsigned int indices[] = {
-    0, 1, 3,  // first Triangle
-    1, 2, 3   // second Triangle
+    0, 1, 3, // first Triangle
+    1, 2, 3  // second Triangle
 };
 
 int main(int argc, char **argv) {
-  char shader_file[128] = { 0 };
+  char shader_file[128] = {0};
   const char *default_shader_file = "shaders/sample.glsl";
 
   if (argc >= 2) {
@@ -52,7 +52,8 @@ int main(int argc, char **argv) {
   GLFWwindow *window = init_glfw_glad(640, 480, "opengl_learn");
   int width = 0, height = 0;
   ShaderProgram *shaderProgram = create_shader_program(shader_file);
-  Object *object = create_object(vertices, sizeof(vertices), indices, sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
+  Object *object = create_object(vertices, sizeof(vertices), indices,
+                                 sizeof(indices), 4, (GLuint[3]){3, 3, 2}, 3);
 
   int w = 0, h = 0;
   GLuint tex_ = load_texture("shaders/img1.png", &w, &h);
@@ -62,7 +63,7 @@ int main(int argc, char **argv) {
   set_shader_uniform(shaderProgram, "tex", (void *)&tex_, UNIFORM_SAMPLER2D);
   set_shader_uniform(shaderProgram, "tex2", (void *)&tex2_, UNIFORM_SAMPLER2D);
 
-  //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
   while (!glfwWindowShouldClose(window)) {
     float ratio = calculate_ratio(window, &width, &height);

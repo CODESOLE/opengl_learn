@@ -104,242 +104,194 @@
 #include <stdlib.h>
 #include <string.h>
 
-static inline char *
-nonposix_strdup(const char *src)
-{
-    char *str = NULL;
-    char *p = NULL;
-    int len = 0;
+static inline char *nonposix_strdup(const char *src) {
+  char *str = NULL;
+  char *p = NULL;
+  int len = 0;
 
-    if (src == NULL) return NULL;
+  if (src == NULL)
+    return NULL;
 
-    while (src[len])
-        len++;
-    str = malloc(len + 1);
-    p = str;
-    while (*src)
-        *p++ = *src++;
-    *p = '\0';
-    return str;
+  while (src[len])
+    len++;
+  str = malloc(len + 1);
+  p = str;
+  while (*src)
+    *p++ = *src++;
+  *p = '\0';
+  return str;
 }
 
-#define create_pair_with_string_key(pair_name, str, val)                      \
-  pair *(pair_name) = (pair *)malloc (sizeof(pair));                         \
-  (pair_name)->key = (void *)nonposix_strdup ((str));                                  \
+#define create_pair_with_string_key(pair_name, str, val)                       \
+  pair *(pair_name) = (pair *)malloc(sizeof(pair));                            \
+  (pair_name)->key = (void *)nonposix_strdup((str));                           \
   (pair_name)->value = (void *)(val)
 
-typedef enum
-{
-  MAP_HEAP = 0,
-  MAP_STACK
-} MapType;
+typedef enum { MAP_HEAP = 0, MAP_STACK } MapType;
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-typedef struct
-{
+typedef struct {
   void *key;
   void *value;
 } pair;
 
 typedef struct Map Map;
 
-struct Map
-{
+struct Map {
   size_t size;
   size_t capacity;
   pair **pairs;
   char memberType[1];
 };
 
-static inline void *
-map_find_by_string_key (Map *m, void *key)
-{
+static inline void *map_find_by_string_key(Map *m, void *key) {
   for (size_t i = 0; i < m->size; ++i)
-    if (memcmp ((void *)key, m->pairs[i]->key, strlen ((char *)key)) == 0)
+    if (memcmp((void *)key, m->pairs[i]->key, strlen((char *)key)) == 0)
       return m->pairs[i]->value;
   return NULL;
 }
 
-static inline void
-map_delete_at (Map *m, size_t index)
-{
-  if (m)
-    {
-      if (index >= m->size)
-        return;
-      if (m->memberType[0] == 's')
-        {
-          m->pairs[index]->key = NULL;
-          m->pairs[index]->value = NULL;
-          m->pairs[index] = NULL;
-        }
-      else
-        {
-          free (m->pairs[index]->key);
-          m->pairs[index]->key = NULL;
-          free (m->pairs[index]->value);
-          m->pairs[index]->value = NULL;
-          free (m->pairs[index]);
-          m->pairs[index] = NULL;
-        }
-      for (size_t i = index; i < (m->size - 1); ++i)
-        {
-          m->pairs[i] = m->pairs[i + 1];
-          m->pairs[i + 1] = NULL;
-        }
-      m->size--;
-      if ((m->size > 0) && ((m->size) == (m->capacity / 4)))
-        {
-          m->capacity /= 2;
-          m->pairs
-              = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
-          if (m->pairs == NULL)
-            {
-              puts ("memory allocation failed!");
-              return;
-            }
-        }
+static inline void map_delete_at(Map *m, size_t index) {
+  if (m) {
+    if (index >= m->size)
+      return;
+    if (m->memberType[0] == 's') {
+      m->pairs[index]->key = NULL;
+      m->pairs[index]->value = NULL;
+      m->pairs[index] = NULL;
+    } else {
+      free(m->pairs[index]->key);
+      m->pairs[index]->key = NULL;
+      free(m->pairs[index]->value);
+      m->pairs[index]->value = NULL;
+      free(m->pairs[index]);
+      m->pairs[index] = NULL;
     }
+    for (size_t i = index; i < (m->size - 1); ++i) {
+      m->pairs[i] = m->pairs[i + 1];
+      m->pairs[i + 1] = NULL;
+    }
+    m->size--;
+    if ((m->size > 0) && ((m->size) == (m->capacity / 4))) {
+      m->capacity /= 2;
+      m->pairs = (pair **)realloc(m->pairs, sizeof(pair *) * m->capacity);
+      if (m->pairs == NULL) {
+        puts("memory allocation failed!");
+        return;
+      }
+    }
+  }
 }
 
-static inline void
-map_clear (Map *m)
-{
+static inline void map_clear(Map *m) {
   if (m->memberType[0] == 's')
-      free (m->pairs);
-  else
-    {
-      for (size_t i = 0; i < m->size; ++i)
-        {
-          free (m->pairs[i]->key);
-          m->pairs[i]->key = NULL;
-          free (m->pairs[i]->value);
-          m->pairs[i]->value = NULL;
-          free (m->pairs[i]);
-          m->pairs[i] = NULL;
-        }
-      free (m->pairs);
+    free(m->pairs);
+  else {
+    for (size_t i = 0; i < m->size; ++i) {
+      free(m->pairs[i]->key);
+      m->pairs[i]->key = NULL;
+      free(m->pairs[i]->value);
+      m->pairs[i]->value = NULL;
+      free(m->pairs[i]);
+      m->pairs[i] = NULL;
     }
+    free(m->pairs);
+  }
   m->pairs = NULL;
   m->size = 0;
   m->capacity = 0;
 }
 
-static inline void
-map_destroy (Map *m)
-{
-  map_clear (m);
-  free (m);
+static inline void map_destroy(Map *m) {
+  map_clear(m);
+  free(m);
 }
 
-static inline void
-map_replace_element (Map *m, size_t index, pair *d)
-{
+static inline void map_replace_element(Map *m, size_t index, pair *d) {
   if (index >= m->size || d == NULL)
     return;
   if (m->memberType[0] == 's')
     m->pairs[index] = d;
-  else
-    {
-      free (m->pairs[index]->key);
-      m->pairs[index]->key = NULL;
-      free (m->pairs[index]->value);
-      m->pairs[index]->value = NULL;
-      free (m->pairs[index]);
-      m->pairs[index] = NULL;
-      m->pairs[index] = d;
-    }
+  else {
+    free(m->pairs[index]->key);
+    m->pairs[index]->key = NULL;
+    free(m->pairs[index]->value);
+    m->pairs[index]->value = NULL;
+    free(m->pairs[index]);
+    m->pairs[index] = NULL;
+    m->pairs[index] = d;
+  }
 }
 
-static inline void
-map_push_back (Map *m, pair *p)
-{
-  if (m->size < m->capacity)
-    {
-      m->pairs[m->size] = p;
-      m->size++;
+static inline void map_push_back(Map *m, pair *p) {
+  if (m->size < m->capacity) {
+    m->pairs[m->size] = p;
+    m->size++;
+  } else {
+    if (m->capacity == 0)
+      m->capacity = 2;
+    else
+      m->capacity *= 2;
+    m->pairs = (pair **)realloc(m->pairs, sizeof(pair *) * m->capacity);
+    if (m->pairs == NULL) {
+      puts("memory allocation failed!");
+      return;
     }
-  else
-    {
-      if (m->capacity == 0)
-        m->capacity = 2;
-      else
-        m->capacity *= 2;
-      m->pairs = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
-      if (m->pairs == NULL)
-        {
-          puts ("memory allocation failed!");
-          return;
-        }
-      m->pairs[m->size] = p;
-      m->size++;
-    }
+    m->pairs[m->size] = p;
+    m->size++;
+  }
 }
 
-static inline void
-map_push_back_with_string_key (Map *m, const char *keyString, void *d)
-{
-  create_pair_with_string_key (_p1, keyString, d);
-  if (m->size < m->capacity)
-    {
-      m->pairs[m->size] = _p1;
-      m->size++;
+static inline void map_push_back_with_string_key(Map *m, const char *keyString,
+                                                 void *d) {
+  create_pair_with_string_key(_p1, keyString, d);
+  if (m->size < m->capacity) {
+    m->pairs[m->size] = _p1;
+    m->size++;
+  } else {
+    if (m->capacity == 0)
+      m->capacity = 2;
+    else
+      m->capacity *= 2;
+    m->pairs = (pair **)realloc(m->pairs, sizeof(pair *) * m->capacity);
+    if (m->pairs == NULL) {
+      puts("memory allocation failed!");
+      free(_p1);
+      return;
     }
-  else
-    {
-      if (m->capacity == 0)
-        m->capacity = 2;
-      else
-        m->capacity *= 2;
-      m->pairs = (pair **)realloc (m->pairs, sizeof(pair *) * m->capacity);
-      if (m->pairs == NULL)
-        {
-          puts ("memory allocation failed!");
-          free (_p1);
-          return;
-        }
-      m->pairs[m->size] = _p1;
-      m->size++;
-    }
+    m->pairs[m->size] = _p1;
+    m->size++;
+  }
 }
 
-static inline void
-map_pop_back (Map *m)
-{
-  map_delete_at (m, m->size - 1);
-}
+static inline void map_pop_back(Map *m) { map_delete_at(m, m->size - 1); }
 
-static inline Map *
-init_map (MapType mapType)
-{
-  if (mapType != MAP_HEAP && mapType != MAP_STACK)
-    {
-        puts ("MapType should be either MAP_HEAP or MAP_STACK! Map NOT "
-        "initialized!");
-        return NULL;
-    }
+static inline Map *init_map(MapType mapType) {
+  if (mapType != MAP_HEAP && mapType != MAP_STACK) {
+    puts("MapType should be either MAP_HEAP or MAP_STACK! Map NOT "
+         "initialized!");
+    return NULL;
+  }
 
-  Map *m = (Map *)malloc (sizeof(Map));
+  Map *m = (Map *)malloc(sizeof(Map));
 
-  if (!m)
-    {
-      puts ("memory allocation failed at map creation!");
-      return NULL;
-    }
+  if (!m) {
+    puts("memory allocation failed at map creation!");
+    return NULL;
+  }
 
   if (mapType == MAP_HEAP)
-      memcpy (m->memberType, (char[1]){ 'h' }, 1);
+    memcpy(m->memberType, (char[1]){'h'}, 1);
   else if (mapType == MAP_STACK)
-      m->memberType[0] = 's';
+    m->memberType[0] = 's';
 
-  m->pairs = (pair **)calloc (2, sizeof(pair *));
+  m->pairs = (pair **)calloc(2, sizeof(pair *));
 
   if (!m->pairs)
-    puts ("memory allocation failed!");
+    puts("memory allocation failed!");
 
   m->size = 0;
   m->capacity = 2;

@@ -1,4 +1,4 @@
-  /* object.h
+/* object.h
  *
  * Copyright 2021 CODESOLE
  *
@@ -26,17 +26,17 @@
 
 typedef struct {
   GLuint *indices;
-  float  *vertexBufferData;
+  float *vertexBufferData;
   GLuint *countOfEachAttr;
-  size_t  indexSize;
-  size_t  bufferSize;
-  GLuint  numberOfAttr;
-  size_t  vertexCount;
-  GLuint  textures[64];
-  GLuint  num_textures;
-  GLuint  vaoId;
-  GLuint  vboId;
-  GLuint  iboId;
+  size_t indexSize;
+  size_t bufferSize;
+  GLuint numberOfAttr;
+  size_t vertexCount;
+  GLuint textures[64];
+  GLuint num_textures;
+  GLuint vaoId;
+  GLuint vboId;
+  GLuint iboId;
 } Object;
 
 Object *create_object(void *vertexBufferData, size_t bufferSize,

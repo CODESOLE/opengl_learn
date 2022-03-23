@@ -22,32 +22,37 @@
 #define COMMON_H
 
 #define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
+#include "debugbreak.h"
 #include "glad.h"
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdio.h>
 #include "linmath.h"
 #include "object.h"
-#include "debugbreak.h"
+#include <GLFW/glfw3.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#define ASSERT(x) \
-    if (!(x))     \
-        debug_break();
+#define ASSERT(x)                                                              \
+  if (!(x))                                                                    \
+    debug_break();
 
 #ifndef NDEBUG
-#define GLErrCall(x) \
-    GLClearError();  \
-    x;               \
-    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+#define GLErrCall(x)                                                           \
+  GLClearError();                                                              \
+  x;                                                                           \
+  ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 #else
 #define GLErrCall(x) x
 #endif
 
-#define UNUSED(expr) do { (void)(expr); } while (0)
+#define UNUSED(expr)                                                           \
+  do {                                                                         \
+    (void)(expr);                                                              \
+  } while (0)
 
-#define RED_COLOR (vec4){1.0f, 0.0f, 0.0f, 1.0f}
-#define BLACK_COLOR (vec4){0.0f, 0.0f, 0.0f, 1.0f}
+#define RED_COLOR                                                              \
+  (vec4) { 1.0f, 0.0f, 0.0f, 1.0f }
+#define BLACK_COLOR                                                            \
+  (vec4) { 0.0f, 0.0f, 0.0f, 1.0f }
 
 void GLClearError(void);
 
@@ -61,7 +66,8 @@ void error_callback(int error, const char *description);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods);
 
 void gl_clear_color(vec4 clearColor);
 

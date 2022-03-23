@@ -22,8 +22,8 @@
 #define PARSE_SHADER
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_READ_CHAR 999
 
@@ -34,6 +34,7 @@ typedef struct {
 
 VertexFragmentShader *parse_shader(const char *shader_file);
 
-VertexFragmentShader *parse_shader_vs_fs(const char *vertexS, const char *fragmentS);
+VertexFragmentShader *parse_shader_vs_fs(const char *vertexS,
+                                         const char *fragmentS);
 
 #endif

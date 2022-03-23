@@ -21,38 +21,55 @@
 #include "common.h"
 
 void GLClearError(void) {
-  while (glGetError() != GL_NO_ERROR);
+  while (glGetError() != GL_NO_ERROR)
+    ;
 }
 
 _Bool GLLogCall(const char *funcName, const char *file, int line) {
   GLenum error;
   while ((error = glGetError())) {
-      switch (error) {
-      case 0x0500:
-          printf("[OpenGL Error] (GL_INVALID_ENUM)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0501:
-          printf("[OpenGL Error] (GL_INVALID_VALUE)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0502:
-          printf("[OpenGL Error] (GL_INVALID_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0503:
-          printf("[OpenGL Error] (GL_STACK_OVERFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0504:
-          printf("[OpenGL Error] (GL_STACK_UNDERDFLOW)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0505:
-          printf("[OpenGL Error] (GL_OUT_OF_MEMORY)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      case 0x0506:
-          printf("[OpenGL Error] (GL_INVALID_FRAMEBUFFER_OPERATION)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", funcName, file, line);
-          break;
-      default:
-          printf("[OpenGL Error] (UNKNOWN_ERR_CODE => 0x0%x)  FUNC_NAME: %s  FILE_NAME: %s  LINE: %d\n", error, funcName, file, line);
-          break;
-      }
+    switch (error) {
+    case 0x0500:
+      printf("[OpenGL Error] (GL_INVALID_ENUM)  FUNC_NAME: %s  FILE_NAME: %s  "
+             "LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0501:
+      printf("[OpenGL Error] (GL_INVALID_VALUE)  FUNC_NAME: %s  FILE_NAME: %s  "
+             "LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0502:
+      printf("[OpenGL Error] (GL_INVALID_OPERATION)  FUNC_NAME: %s  FILE_NAME: "
+             "%s  LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0503:
+      printf("[OpenGL Error] (GL_STACK_OVERFLOW)  FUNC_NAME: %s  FILE_NAME: %s "
+             " LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0504:
+      printf("[OpenGL Error] (GL_STACK_UNDERDFLOW)  FUNC_NAME: %s  FILE_NAME: "
+             "%s  LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0505:
+      printf("[OpenGL Error] (GL_OUT_OF_MEMORY)  FUNC_NAME: %s  FILE_NAME: %s  "
+             "LINE: %d\n",
+             funcName, file, line);
+      break;
+    case 0x0506:
+      printf("[OpenGL Error] (GL_INVALID_FRAMEBUFFER_OPERATION)  FUNC_NAME: %s "
+             " FILE_NAME: %s  LINE: %d\n",
+             funcName, file, line);
+      break;
+    default:
+      printf("[OpenGL Error] (UNKNOWN_ERR_CODE => 0x0%x)  FUNC_NAME: %s  "
+             "FILE_NAME: %s  LINE: %d\n",
+             error, funcName, file, line);
+      break;
+    }
     return 0;
   }
   return 1;
@@ -68,18 +85,21 @@ void error_callback(int error, const char *description) {
 }
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
-  UNUSED (window);
+  UNUSED(window);
   GLErrCall(glViewport(0, 0, width, height));
 }
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
-  UNUSED(scancode); UNUSED(mods);
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods) {
+  UNUSED(scancode);
+  UNUSED(mods);
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
 void gl_clear_color(vec4 clearColor) {
-  GLErrCall(glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]));
+  GLErrCall(
+      glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]));
   GLErrCall(glClear(GL_COLOR_BUFFER_BIT));
 }
 
@@ -108,7 +128,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
   glfwSetScrollCallback(window, scroll_callback);
 
   glfwMakeContextCurrent(window);
-  if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     perror("Failed to initialize GLAD");
     exit(EXIT_FAILURE);
   }
@@ -123,7 +143,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
 
 float calculate_ratio(GLFWwindow *window, int *width, int *height) {
   glfwGetFramebufferSize(window, width, height);
-  return *width / (float) *height;
+  return *width / (float)*height;
 }
 
 void glfw_routine(GLFWwindow *window) {

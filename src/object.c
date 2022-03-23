@@ -21,18 +21,22 @@
 #include "object.h"
 #include "common.h"
 
-Object *create_object (void *vertexBufferData, size_t bufferSize,
-                       GLuint *indices, size_t indexSize, size_t vertexCount,
-                       GLuint *arrayOfAttr, GLuint numberOfAttr) {
+Object *create_object(void *vertexBufferData, size_t bufferSize,
+                      GLuint *indices, size_t indexSize, size_t vertexCount,
+                      GLuint *arrayOfAttr, GLuint numberOfAttr) {
   if (!vertexBufferData || !arrayOfAttr) {
-    fprintf(stderr, "[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n", __FILE__, __LINE__);
+    fprintf(
+        stderr,
+        "[ERROR] :: vertexBufferData or countOfEachAttr cannot be NULL %s:%d\n",
+        __FILE__, __LINE__);
     return NULL;
   }
 
   Object *object = malloc(sizeof(Object));
 
   if (!object) {
-    fprintf(stderr, "[ERROR] :: Cannot allocate object %s:%d\n", __FILE__, __LINE__);
+    fprintf(stderr, "[ERROR] :: Cannot allocate object %s:%d\n", __FILE__,
+            __LINE__);
     return NULL;
   }
 
@@ -53,10 +57,12 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
 
     GLErrCall(glBindVertexArray(object->vaoId));
     GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
-    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
+    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize,
+                           object->vertexBufferData, GL_STATIC_DRAW));
 
     GLErrCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object->iboId));
-    GLErrCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize, object->indices, GL_STATIC_DRAW));
+    GLErrCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->indexSize,
+                           object->indices, GL_STATIC_DRAW));
 
     {
       GLuint size = 0, offset = 0;
@@ -64,7 +70,9 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
         size += object->countOfEachAttr[i];
 
       for (GLuint i = 0; i < object->numberOfAttr; i++) {
-        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)(uintptr_t)offset));
+        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT,
+                                        GL_FALSE, size * sizeof(float),
+                                        (void *)(uintptr_t)offset));
         GLErrCall(glEnableVertexAttribArray(i));
         offset += object->countOfEachAttr[i] * sizeof(float);
       }
@@ -82,7 +90,8 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
 
     GLErrCall(glBindVertexArray(object->vaoId));
     GLErrCall(glBindBuffer(GL_ARRAY_BUFFER, object->vboId));
-    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize, object->vertexBufferData, GL_STATIC_DRAW));
+    GLErrCall(glBufferData(GL_ARRAY_BUFFER, object->bufferSize,
+                           object->vertexBufferData, GL_STATIC_DRAW));
 
     {
       GLuint size = 0, offset = 0;
@@ -90,7 +99,9 @@ Object *create_object (void *vertexBufferData, size_t bufferSize,
         size += object->countOfEachAttr[i];
 
       for (GLuint i = 0; i < object->numberOfAttr; i++) {
-        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT, GL_FALSE, size * sizeof(float), (void*)&offset));
+        GLErrCall(glVertexAttribPointer(i, object->countOfEachAttr[i], GL_FLOAT,
+                                        GL_FALSE, size * sizeof(float),
+                                        (void *)&offset));
         GLErrCall(glEnableVertexAttribArray(i));
         offset += object->countOfEachAttr[i] * sizeof(float);
       }

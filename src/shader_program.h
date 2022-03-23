@@ -22,8 +22,8 @@
 #define SHADER_PROGRAM
 
 #include "common.h"
-#include "parse_shader.h"
 #include "map.h"
+#include "parse_shader.h"
 
 typedef struct {
   GLuint shaderProgramID;
@@ -31,20 +31,21 @@ typedef struct {
 } ShaderProgram;
 
 typedef enum {
-    UNIFORM_FLOAT = 0,
-    UNIFORM_VEC2,
-    UNIFORM_VEC3,
-    UNIFORM_VEC4,
-    UNIFORM_INT,
-    UNIFORM_INT_VEC2,
-    UNIFORM_INT_VEC3,
-    UNIFORM_INT_VEC4,
-    UNIFORM_SAMPLER2D
+  UNIFORM_FLOAT = 0,
+  UNIFORM_VEC2,
+  UNIFORM_VEC3,
+  UNIFORM_VEC4,
+  UNIFORM_INT,
+  UNIFORM_INT_VEC2,
+  UNIFORM_INT_VEC3,
+  UNIFORM_INT_VEC4,
+  UNIFORM_SAMPLER2D
 } ShaderUniformDataType;
 
 ShaderProgram *create_shader_program(const char *shaderFileName);
 
-ShaderProgram *create_shader_program_vs_fs(const char *vertexSource, const char *fragmentSource);
+ShaderProgram *create_shader_program_vs_fs(const char *vertexSource,
+                                           const char *fragmentSource);
 
 void use_shader(ShaderProgram *shaderProgram);
 
@@ -52,7 +53,8 @@ void set_shader_uniform(ShaderProgram *shaderProgram, const char *uniformName,
                         const void *value, ShaderUniformDataType uniformType);
 
 void set_shader_uniform_v(ShaderProgram *shaderProgram, const char *uniformName,
-                          const void *value, ShaderUniformDataType uniformType, GLuint count);
+                          const void *value, ShaderUniformDataType uniformType,
+                          GLuint count);
 
 void unuse_shader(void);
 
