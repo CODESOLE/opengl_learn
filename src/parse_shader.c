@@ -19,6 +19,7 @@
  */
 
 #include "parse_shader.h"
+#include "common.h"
 
 VertexFragmentShader *parse_shader_vs_fs(const char *vertexS,
                                          const char *fragmentS) {
@@ -48,9 +49,9 @@ VertexFragmentShader *parse_shader_vs_fs(const char *vertexS,
   char line[MAX_READ_CHAR] = {0};
   VertexFragmentShader *parsed_data = calloc(1, sizeof(VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
-  strcpy(parsed_data->vertexShader, "");
+  xstrlcpy(parsed_data->vertexShader, "", 1);
   parsed_data->fragmentShader = malloc(1);
-  strcpy(parsed_data->fragmentShader, "");
+  xstrlcpy(parsed_data->fragmentShader, "", 1);
 
   while (fgets(line, MAX_READ_CHAR, vertexFile) != NULL) {
     parsed_data->vertexShader =
@@ -100,9 +101,9 @@ VertexFragmentShader *parse_shader(const char *shader_file) {
   char line[MAX_READ_CHAR] = {0};
   VertexFragmentShader *parsed_data = calloc(1, sizeof(VertexFragmentShader));
   parsed_data->vertexShader = malloc(1);
-  strcpy(parsed_data->vertexShader, "");
+  xstrlcpy(parsed_data->vertexShader, "", 1);
   parsed_data->fragmentShader = malloc(1);
-  strcpy(parsed_data->fragmentShader, "");
+  xstrlcpy(parsed_data->fragmentShader, "", 1);
   unsigned vertexFound = 0, fragmentFound = 0;
 
   while (fgets(line, MAX_READ_CHAR, file) != NULL) {
