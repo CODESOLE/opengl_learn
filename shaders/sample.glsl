@@ -10,6 +10,7 @@ uniform float time;
 out vec3 outPos;
 out vec3 outCol;
 out vec2 outUV;
+out vec4 outColor;
 
 void main() {
   gl_Position = vec4(aPos.x, aPos.y + sin(2 * time) / 2, aPos.z, 1.0);
@@ -33,5 +34,5 @@ uniform sampler2D tex2;
 void main() {
   vec4 img = mix(texture(tex, outUV), texture(tex2, outUV), 0.5);
 
-  gl_FragColor = img;
+  outColor = img;
 }
