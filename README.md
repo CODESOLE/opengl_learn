@@ -15,7 +15,7 @@ OpenGL experimenting repo.
 # Dependencies
 
  - [CMake](https://cmake.org/download/)
- - For Windows -> [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/)
+ - For Windows -> [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
  - For Windows -> [Conan Package Manager](https://conan.io/)
  - [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 
