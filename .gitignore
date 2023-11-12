@@ -13,3 +13,5 @@
 !/coverage/Makefile
 compile_commands.json
 /.cache
+CMakeUserPresets.json
+Session.vim

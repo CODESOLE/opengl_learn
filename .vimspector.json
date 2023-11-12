@@ -1,0 +1,17 @@
+{
+  "configurations": {
+    "Launch MSVC Target": {
+      "adapter": "CodeLLDB",
+      "configuration": {
+        "type": "rust",
+        "request": "launch",
+        "program": "${workspaceRoot}/build/Release/opengl_learn",
+        "cwd": "${workspaceRoot}",
+        "env": {
+          "BASEPATH": "${workspaceRoot}"
+        },
+        "args": []
+      }
+    }
+  }
+}
