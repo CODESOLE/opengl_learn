@@ -13,10 +13,10 @@
 OpenGL experimenting repo.
 
 # Dependencies
+
  - [CMake](https://cmake.org/download/)
- - [MinGW-W64](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe/download)  ( If you want to build with make along with gcc )
- - [Ninja](https://github.com/ninja-build/ninja/releases)  ( If you want to build with ninja along with gcc which is default )
- - [Visual Studio](https://visualstudio.microsoft.com/downloads/)  ( If you want to build with MSBuild (Windows Native build tools) )
+ - For Windows -> [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/)
+ - For Windows -> [Conan Package Manager](https://conan.io/)
  - [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 
  **Make sure these are installed and on your PATH.**
@@ -24,49 +24,31 @@ OpenGL experimenting repo.
 ```
 git clone https://https://github.com/CODESOLE/opengl_learn.git
 ```
+
+
 # Linux Specific Dependencies
+
  - GLFW
  - GCC
- - CMake
 
 Install them according to your distribution package name.
 
+
 # Build Instructions For WINDOWS
-Run ```build-windows.bat <target-build-system> <Compiler-Collection>``` target build system can be ninja, make or msbuild. Compiler-Collection can be gcc or clang If your target-build-system is make or ninja other than msbuild. For example:
 
-```build-windows.bat ninja```         -> it will choose gcc with ninja
-
-```build-windows.bat msbuild```       -> it will choose MSVC with MSBuild
-
-```build-windows.bat make```          -> it will choose gcc with make
-
-```build-windows.bat ninja gcc```     -> it will choose gcc with ninja
-
-```build-windows.bat make gcc```      -> it will choose gcc with make
-
-```build-windows.bat ninja clang```   -> it will choose clang with ninja
-
-```build-windows.bat make clang```    -> it will choose clang with make
-
-If you are not specify the build-target, it will choose ninja as default.
+Just Run:
+```shell
+.\build-windows.bat
+```
 
 
 # Build Instructions For LINUX
-Run ```build-linux.sh <target-build-system>``` target build system can be ninja or make. Compiler-Collection can be gcc or clang. For example:
 
-```build-linux.sh ninja```            -> it will choose gcc with ninja
+```shell
+./build-linux.sh
+```
 
-```build-linux.sh make```             -> it will choose gcc with make
-
-```build-linux.sh ninja gcc```        -> it will choose gcc with ninja
-
-```build-linux.sh make gcc```         -> it will choose gcc with make
-
-```build-linux.sh ninja clang```      -> it will choose clang with ninja
-
-```build-linux.sh make clang```       -> it will choose clang with make
-
-If you are not specify the build-target, it will choose ninja as default.
 
 # LICENSE
+
 [![gpl-3.0](https://www.gnu.org/graphics/gplv3-with-text-136x68.png)](https://www.gnu.org/licenses/gpl-3.0)
