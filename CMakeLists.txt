@@ -9,6 +9,13 @@ add_subdirectory(utilities)
 
 find_package(glfw3 3.3 REQUIRED)
 
+set(MATH "")
+include(CheckLibraryExists)
+check_library_exists(m pow "" LIBM)
+if(LIBM)
+    list(APPEND MATH "m")
+endif()
+
 add_library(
   opengl_learn_objects OBJECT
   ${CMAKE_SOURCE_DIR}/src/common.c
@@ -20,10 +27,11 @@ add_library(
   ${CMAKE_SOURCE_DIR}/include/glad/glad.c)
 
 target_include_directories(opengl_learn_objects PUBLIC src include/glad include utilities)
-target_link_libraries(opengl_learn_objects glfw)
+target_link_libraries(opengl_learn_objects glfw ${MATH})
+
 add_executable(opengl_learn src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
 target_include_directories(opengl_learn PUBLIC src include/glad include utilities)
-target_link_libraries(opengl_learn glfw)
+target_link_libraries(opengl_learn glfw ${MATH})
 
 add_custom_command(
   TARGET opengl_learn
