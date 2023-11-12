@@ -13,7 +13,7 @@ set(MATH "")
 include(CheckLibraryExists)
 check_library_exists(m pow "" LIBM)
 if(LIBM)
-    list(APPEND MATH "m")
+    list(APPEND MATH m)
 endif()
 
 add_library(
