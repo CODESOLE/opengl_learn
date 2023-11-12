@@ -44,6 +44,7 @@ Just Run:
 
 # Build Instructions For LINUX
 
+Just Run:
 ```shell
 ./build-linux.sh
 ```
