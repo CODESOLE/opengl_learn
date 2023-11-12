@@ -38,6 +38,10 @@ jobs:
     - name: Clone Repo
       uses: actions/checkout@v2
 
+    - name: Install Conan
+      id: conan
+      uses: turtlebrowser/get-conan@main
+
     - name: Build
       # Build your program with the given configuration
       run: .\build-windows.bat
