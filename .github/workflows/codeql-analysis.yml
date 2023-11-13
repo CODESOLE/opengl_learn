@@ -31,7 +31,7 @@ jobs:
         queries: security-extended
 
     - name: Install Conan Package Manager
-      run: sudo pip3 install conan -y
+      run: sudo pip3 install conan
 
     - name: Build
       run: build-linux.sh
