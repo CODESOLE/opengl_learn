@@ -2,10 +2,14 @@
 
 if [ "$1" = "release" ]
 then
-  printf "\nBuilding in release mode.\n"
-  cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 && cmake --build build --config Release
+  conan profile detect --force
+  conan install . --build=missing --settings=build_type=Release
+  cmake --preset conan-default
+  cmake --build build --config Release
 else
-  printf "\nBuilding in debug mode.\n"
-  cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 && cmake --build build --config Debug
+  conan profile detect --force
+  conan install . --build=missing --settings=build_type=Debug
+  cmake --preset conan-default
+  cmake --build build --config Debug
 fi
 

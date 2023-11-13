@@ -1,9 +1,14 @@
 @echo off
 
 setlocal EnableDelayedExpansion
-
-conan profile detect --force
-REM conan install . -s &:build_type=Debug -s build_type=Release --build=missing
-conan install . --build=missing
-cmake --preset conan-default
-cmake --build build --config Release
+IF "%1"=="release" (
+  conan profile detect --force
+  conan install . --build=missing --settings=build_type=Release
+  cmake --preset conan-default
+  cmake --build build --config Release
+) ELSE (
+  conan profile detect --force
+  conan install . --build=missing --settings=build_type=Debug
+  cmake --preset conan-default
+  cmake --build build --config Debug
+)
