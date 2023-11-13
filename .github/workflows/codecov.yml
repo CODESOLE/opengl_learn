@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch
-        uses: actions/checkout@master
-        
+        uses: actions/checkout@v4
+
       - name: Setup Dependencies
         run: sudo apt update && sudo apt install xorg openbox libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev ninja-build pkg-config libx11-dev
-        
+
       - name: Test
         run: cd ${{github.workspace}}/coverage && make
-        
+
       - name: Upload
         uses: codecov/codecov-action@v1
         with:

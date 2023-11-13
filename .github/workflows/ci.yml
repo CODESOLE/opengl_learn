@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install Conan Package Manager
       run: sudo pip3 install conan && sudo apt update && sudo apt install xorg openbox libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libx11-dev
@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - name: Clone Repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Install Conan
       id: conan

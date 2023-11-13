@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -34,7 +34,7 @@ jobs:
       run: sudo pip3 install conan && sudo apt update && sudo apt install xorg openbox libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libx11-dev
 
     - name: Build
-      run: build-linux.sh
+      run: ./build-linux.sh
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
