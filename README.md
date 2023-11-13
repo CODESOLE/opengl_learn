@@ -1,4 +1,5 @@
 # OpenGL Learn
+
 [![ci](https://github.com/codesole/opengl_learn/actions/workflows/ci.yml/badge.svg)](https://github.com/codesole/opengl_learn/actions?query=workflow%3Aci)
 [![Build Status](https://travis-ci.com/CODESOLE/opengl_learn.svg?branch=main)](https://travis-ci.com/CODESOLE/opengl_learn)
 [![CodeQL](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CODESOLE/opengl_learn/actions/workflows/codeql-analysis.yml)
@@ -16,7 +17,7 @@ OpenGL experimenting repo.
 
  - [CMake](https://cmake.org/download/)
  - For Windows -> [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
- - For Windows -> [Conan Package Manager](https://conan.io/)
+ - [Conan Package Manager](https://conan.io/)
  - [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 
  **Make sure these are installed and on your PATH.**
@@ -24,14 +25,6 @@ OpenGL experimenting repo.
 ```
 git clone https://https://github.com/CODESOLE/opengl_learn.git
 ```
-
-
-# Linux Specific Dependencies
-
- - GLFW
- - GCC
-
-Install them according to your distribution package name.
 
 
 # Build Instructions For WINDOWS
