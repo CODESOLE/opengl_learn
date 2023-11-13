@@ -13,7 +13,15 @@ set(MATH "")
 include(CheckLibraryExists)
 check_library_exists(m pow "" LIBM)
 if(LIBM)
-    list(APPEND MATH m)
+  list(APPEND MATH m)
+endif()
+
+if(MSVC)
+  add_compile_options(/W4 /WX)
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+else()
+  add_compile_options(-Wall -Wextra -Werror -Wpedantic -pedantic
+                      -pedantic-errors)
 endif()
 
 add_library(
@@ -26,11 +34,13 @@ add_library(
   ${CMAKE_SOURCE_DIR}/src/texture.c
   ${CMAKE_SOURCE_DIR}/include/glad/glad.c)
 
-target_include_directories(opengl_learn_objects PUBLIC src include/glad include utilities)
+target_include_directories(opengl_learn_objects PUBLIC src include/glad include
+                                                       utilities)
 target_link_libraries(opengl_learn_objects glfw ${MATH})
 
 add_executable(opengl_learn src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
-target_include_directories(opengl_learn PUBLIC src include/glad include utilities)
+target_include_directories(opengl_learn PUBLIC src include/glad include
+                                               utilities)
 target_link_libraries(opengl_learn glfw ${MATH})
 
 add_custom_command(
