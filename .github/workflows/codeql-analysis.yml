@@ -30,6 +30,9 @@ jobs:
         languages: c
         queries: security-extended
 
+    - name: Install Conan Package Manager
+      run: sudo pip3 install conan -y
+
     - name: Build
       run: build-linux.sh
 
