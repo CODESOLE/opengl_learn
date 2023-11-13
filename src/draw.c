@@ -23,7 +23,7 @@
 void draw(Object *object, ShaderProgram *shaderProgram) {
   use_shader(shaderProgram);
 
-  for (int i = 0; i < object->num_textures; ++i) {
+  for (unsigned int i = 0; i < object->num_textures; ++i) {
     GLErrCall(glActiveTexture(GL_TEXTURE0 + i));
     GLErrCall(glBindTexture(GL_TEXTURE_2D, object->textures[i]));
   }

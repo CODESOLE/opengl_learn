@@ -27,7 +27,7 @@ void GLClearError(void) {
 
 _Bool GLLogCall(const char *funcName, const char *file, int line) {
   GLenum error;
-  while ((error = glGetError())) {
+  while ((error = glGetError()) != GL_NO_ERROR) {
     switch (error) {
     case 0x0500:
       printf("[OpenGL Error] (GL_INVALID_ENUM)  FUNC_NAME: %s  FILE_NAME: %s  "
@@ -75,9 +75,17 @@ _Bool GLLogCall(const char *funcName, const char *file, int line) {
   return 1;
 }
 
-void mouse_callback(GLFWwindow *window, double xpos, double ypos) {}
+void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
+  UNUSED(window);
+  UNUSED(xpos);
+  UNUSED(ypos);
+}
 
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {}
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
+  UNUSED(window);
+  UNUSED(xoffset);
+  UNUSED(yoffset);
+}
 
 void error_callback(int error, const char *description) {
   UNUSED(error);
