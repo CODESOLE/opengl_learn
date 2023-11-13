@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install Conan Package Manager
-      run: sudo pip3 install conan && sudo apt update && sudo apt install xorg-dev libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libx11-dev
+      run: sudo pip3 install conan && sudo apt update && sudo apt install xorg openbox libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libx11-dev
 
     - name: Build
       # Build your program with the given configuration
