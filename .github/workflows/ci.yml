@@ -12,14 +12,11 @@ env:
   DISPLAY: :0
 
 jobs:
-  LINUX_JOB_GCC:
+  LINUX_BUILD:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: install-deps
-      run: sudo apt update && sudo apt install xorg openbox libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev pkg-config libx11-dev
 
     - name: Build
       # Build your program with the given configuration
@@ -31,7 +28,7 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
 
-  WINDOWS_JOB_MSVC:
+  WINDOWS_BUILD:
     runs-on: windows-latest
 
     steps:
