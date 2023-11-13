@@ -31,7 +31,7 @@ jobs:
         queries: security-extended
 
     - name: Install Conan Package Manager
-      run: sudo pip3 install conan && sudo apt update && sudo apt install xorg openbox libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libx11-dev
+      run: sudo pip3 install conan && sudo apt update && sudo apt install xorg openbox libglfw3 libglfw3-dev libcurl4-openssl-dev libcurl4 libxcursor-dev libxinerama-dev libxrandr-dev libcurl4-openssl-dev libxi-dev ninja-build pkg-config libx11-dev
 
     - name: Build
       run: ./build-linux.sh
