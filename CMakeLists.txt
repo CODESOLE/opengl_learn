@@ -34,13 +34,15 @@ add_library(
   ${CMAKE_SOURCE_DIR}/src/texture.c
   ${CMAKE_SOURCE_DIR}/include/glad/glad.c)
 
-target_include_directories(opengl_learn_objects PUBLIC src include/glad include
-                                                       utilities)
+target_include_directories(opengl_learn_objects PUBLIC src)
+target_include_directories(opengl_learn_objects SYSTEM PUBLIC include/glad
+                                                              include utilities)
 target_link_libraries(opengl_learn_objects glfw ${MATH})
 
 add_executable(opengl_learn src/main.c $<TARGET_OBJECTS:opengl_learn_objects>)
-target_include_directories(opengl_learn PUBLIC src include/glad include
-                                               utilities)
+target_include_directories(opengl_learn PUBLIC src)
+target_include_directories(opengl_learn SYSTEM PUBLIC include/glad include
+                                                      utilities)
 target_link_libraries(opengl_learn glfw ${MATH})
 
 add_custom_command(
