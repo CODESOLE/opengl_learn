@@ -1,4 +1,4 @@
-INC:=-I../src -I../utilities -I../include -I../include/glad
+INC:=-I../src -I../include -I../include/glad
 
 all: $(filter-out ../src/main.c,$(wildcard ../src/*.c))
 	cp -r ../shaders .

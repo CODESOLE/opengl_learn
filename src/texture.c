@@ -20,7 +20,7 @@
 
 #include "texture.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image/stb_image.h"
+#include "stb_image.h"
 
 GLuint load_texture(const char *tex_path, int *w, int *h) {
   GLuint texture_id = 0;
