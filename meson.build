@@ -18,7 +18,7 @@ source_files = [
   'src/parse_shader.c',
   'src/shader_program.c',
   'src/texture.c',
-  'include/glad/glad.c',
+  'include/glad/gl.c',
 ]
 
 executable('opengl_learn', sources: source_files,

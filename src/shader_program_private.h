@@ -21,7 +21,7 @@
 #ifndef SHADER_PROGRAM_PRIVATE_H
 #define SHADER_PROGRAM_PRIVATE_H
 
-#include "glad.h"
+#include "gl.h"
 #include "shader_program.h"
 
 GLint check_and_get_uniform(ShaderProgram *shaderProgram,

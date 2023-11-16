@@ -23,7 +23,7 @@
 
 #define GLFW_INCLUDE_NONE
 #include "debugbreak.h"
-#include "glad.h"
+#include "gl.h"
 #include "linmath.h"
 #include "object.h"
 #include <GLFW/glfw3.h>

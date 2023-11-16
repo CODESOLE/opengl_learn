@@ -136,7 +136,7 @@ GLFWwindow *init_glfw_glad(int width, int height, const char *windowName) {
   glfwSetScrollCallback(window, scroll_callback);
 
   glfwMakeContextCurrent(window);
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  if (!gladLoadGL(glfwGetProcAddress)) {
     perror("Failed to initialize GLAD");
     exit(EXIT_FAILURE);
   }
