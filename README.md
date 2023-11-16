@@ -17,7 +17,14 @@ OpenGL experimenting repo.
  - [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 
  **Make sure these are installed and on your PATH.**
-
+ 
+If you are on Windows 10 version 1709 and later, you can install this dependencies easily with this command (open cmd.exe or powershell.exe and type):
+```shell
+winget install --id Microsoft.VisualStudio.2022.BuildTools
+winget install --id Git.Git
+winget install --id mesonbuild.meson
+```
+Then:
 ```
 git clone https://https://github.com/CODESOLE/opengl_learn.git
 ```
