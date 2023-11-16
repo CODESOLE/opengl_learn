@@ -35,14 +35,13 @@ jobs:
 
     - name: Setup Python & Meson Build Task
       uses: actions/setup-python@v1
-      uses: BSFishy/meson-build@v1.0.3
       with:
-        action: build
-    _ run: pip install meson ninja
-    _ run: mkdir subprojects
-    _ run: meson wrap install glfw
-    _ run: meson setup build
-    _ run: meson compile -C build
+        python-version: '3.x'
+    - run: pip install meson ninja
+    - run: mkdir subprojects
+    - run: meson wrap install glfw
+    - run: meson setup build
+    - run: meson compile -C build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2

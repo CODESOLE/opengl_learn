@@ -44,9 +44,8 @@ jobs:
 
     - name: Setup Python & Meson Build Task
       uses: actions/setup-python@v1
-      uses: BSFishy/meson-build@v1.0.3
       with:
-        action: build
+        python-version: '3.x'
     - run: pip install meson ninja
     - run: mkdir subprojects
     - run: meson wrap install glfw
