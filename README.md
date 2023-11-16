@@ -14,9 +14,8 @@ OpenGL experimenting repo.
 
 # Dependencies
 
- - [CMake](https://cmake.org/download/)
+ - [Meson](https://mesonbuild.com/Getting-meson.html)
  - For Windows -> [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
- - [Conan Package Manager](https://conan.io/)
  - [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 
  **Make sure these are installed and on your PATH.**
@@ -35,6 +34,12 @@ Just Run:
 
 
 # Build Instructions For LINUX
+
+For Linux install build dependencies, for Ubuntu/Debian and its derivatives command is:
+
+```shell
+sudo apt update && sudo apt install libx11-xcb-dev libfontenc-dev libice-dev libsm-dev libxaw7-dev libxcomposite-dev libxcursor-dev libxdamage-dev libxfixes-dev libxi-dev libxinerama-dev libxkbfile-dev libxmu-dev libxmuu-dev libxpm-dev libxrandr-dev libxrender-dev libxres-dev libxss-dev libxt-dev libxtst-dev libxv-dev libxvmc-dev libxxf86vm-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-dri3-dev libxcb-cursor-dev libxcb-util-dev libxcb-util0-dev libgl-dev libgl1-mesa-dev libxkbcommon-dev
+```
 
 Just Run:
 ```shell
