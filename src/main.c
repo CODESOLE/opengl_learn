@@ -34,6 +34,10 @@ unsigned int indices[] = {
     1, 2, 3  // second Triangle
 };
 
+#ifdef _MSC_VER
+#    pragma comment(linker, "/ENTRY:mainCRTStartup")
+#endif
+
 int main(int argc, char **argv) {
   char shader_file[128] = {0};
   const char *default_shader_file = "shaders/sample.glsl";

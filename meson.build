@@ -22,5 +22,6 @@ source_files = [
 ]
 
 executable('opengl_learn', sources: source_files,
+           win_subsystem: 'windows',
            include_directories: include_directories(['include', 'src', 'include/glad']),
            dependencies: [glfw_dep, m_dep])
